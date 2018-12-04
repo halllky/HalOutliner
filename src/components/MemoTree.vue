@@ -5,7 +5,9 @@
         <span class="memo__timestamp">{{ item.addDt }}</span>
         <span class="btn" @click="addChild"><span class="plus"></span></span>
         <span class="btn" @click="switchTodo">todo</span>
-        <span class="btn" @click="switchExpand">{{ item.expanded ? '-' : '+' }}</span>
+        <span class="btn" @click="switchExpand" style="min-width: 20px;">
+          {{ item.expanded ? '-' : item.children ? item.children.length : '0' }}
+        </span>
       </div>
       <div class="memo__body">
         <textarea
@@ -62,7 +64,11 @@ export default {
       this.$set(this.item, 'todo', !this.item.todo);
     },
     switchExpand: function () {
-      this.$set(this.item, 'expanded', !this.item.expanded);
+      if (this.item.children) {
+        this.$set(this.item, 'expanded', !this.item.expanded);
+      } else {
+        this.$set(this.item, 'expanded', true);
+      }
     },
     deleteIfEmpty: function (e) {
       if (e.target.value || (this.item.children && this.item.children.length)) {
@@ -96,6 +102,7 @@ export default {
         type: 0,
         value: ''
       })
+      this.$set(this.item, 'expanded', true);
     },
     changeHeight: function (e) {
       e.target.style.height = '0';
