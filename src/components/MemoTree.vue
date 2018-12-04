@@ -3,10 +3,10 @@
     <div class="memo">
       <div class="memo__header">
         <span class="memo__timestamp">{{ item.updDt }}</span>
-        <span class="memo__add" @click="addChild">
-          <span class="memo__plus"></span>
+        <span class="btn" @click="addChild">
+          <span class="plus"></span>
         </span>
-        <span class="btn" @click="switchTodo">TD</span>
+        <span class="btn" @click="switchTodo">todo</span>
         <span style="display: none;" class="memo__delete" @click="removeThis"></span>
       </div>
       <div class="memo__body" v-for="(i, index) in item.body" :key="index">

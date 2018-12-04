@@ -20,8 +20,8 @@
           @save="save"></memo-tree>
       </div>
     </transition-group>
-    <div class="memo__add memo__child" @click="addRootMemo">
-      <span class="memo__plus"></span>
+    <div class="btn memo__child" @click="addRootMemo">
+      <span class="plus"></span>
     </div>
   </div>
 </template>
@@ -183,12 +183,20 @@ $col_subfont: gray;
     font-weight: 500;
     line-height: 16px;
   }
-  &__add{
-    min-width: 20px;
-    min-height: 20px;
-    display: flex;
-    background: $col_accent;
-    border-radius: $siz_radius;
+}
+.btn{
+  min-width: 20px;
+  min-height: 20px;
+  padding: 0px 2px;
+  background: $col_accent;
+  color: $col_main;
+  border-radius: $siz_radius;
+  text-align: center;
+  user-select: none;
+  cursor: default;
+  &:active{
+    background: darken($col_accent, 10%);
+    transform: translateY(1px);
   }
 }
 .todo{
@@ -202,7 +210,7 @@ $col_subfont: gray;
   transform: translateY(-100%);
 }
 /* http://weboook.blog22.fc2.com/blog-entry-401.html */
-.memo__plus{
+.plus{
   display: inline-block;
   position: relative;
   margin: auto;
@@ -210,8 +218,9 @@ $col_subfont: gray;
   width: 4px;
   height: 16px;
   background: $col_main;
+  transform: translateY(3px);
 }
-.memo__plus:before{
+.plus:before{
   display: block;
   content: "";
   position: absolute;
