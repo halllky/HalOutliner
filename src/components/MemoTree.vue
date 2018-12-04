@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="memo">
+    <div class="memo" :class="{ todo: item.todo }">
       <div class="memo__header">
         <span class="memo__timestamp">{{ item.updDt }}</span>
         <span class="btn" @click="addChild"><span class="plus"></span></span>
@@ -29,7 +29,7 @@
             <div class="memo__child" v-for="(c, index) in item.children" :key="index">
               <memo-tree
                 :item="c"
-                @remove="removeChild($event); save();;"
+                @remove="removeChild($event); save();"
                 @save="save();"></memo-tree>
             </div>
         </transition-group>
@@ -61,14 +61,7 @@ export default {
       this.$emit('save');
     },
     switchTodo: function () {
-      var b = this.$el.getElementsByClassName('memo');
-      if (this.item.todo) {
-        this.$set(this.item, 'todo', false);
-        if (b.length) { b[0].classList.remove('todo'); }
-      } else {
-        this.$set(this.item, 'todo', true);
-        if (b.length) { b[0].classList.add('todo'); }
-      }
+      this.$set(this.item, 'todo', !this.item.todo);
     },
     switchExpand: function () {
       this.$set(this.item, 'expanded', !this.item.expanded);
