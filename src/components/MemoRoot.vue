@@ -47,6 +47,7 @@ export default {
       this.itemData.push({
         addDt: this.formatDate(new Date(), 'YYYY-MM-DD hh:mm'),
         updDt: this.formatDate(new Date(), 'YYYY-MM-DD hh:mm'),
+        expanded: true,
         body: [
           {
             type: 0,

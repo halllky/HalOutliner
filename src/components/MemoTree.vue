@@ -5,6 +5,7 @@
         <span class="memo__timestamp">{{ item.updDt }}</span>
         <span class="btn" @click="addChild"><span class="plus"></span></span>
         <span class="btn" @click="switchTodo">todo</span>
+        <span class="btn" @click="switchExpand">{{ item.expanded ? '-' : '+' }}</span>
       </div>
       <div class="memo__body" v-for="(i, index) in item.body" :key="index">
         <textarea
@@ -23,14 +24,16 @@
       </div>
     </div>
     <div class="memo__children">
-      <transition-group>
-        <div class="memo__child" v-for="(c, index) in item.children" :key="index">
-          <memo-tree
-            :item="c"
-            @remove="removeChild($event); save();;"
-            @save="save();"></memo-tree>
-        </div>
-      </transition-group>
+      <div v-if="item.expanded">
+        <transition-group>
+            <div class="memo__child" v-for="(c, index) in item.children" :key="index">
+              <memo-tree
+                :item="c"
+                @remove="removeChild($event); save();;"
+                @save="save();"></memo-tree>
+            </div>
+        </transition-group>
+      </div>
     </div>
   </div>
 </template>
@@ -67,6 +70,9 @@ export default {
         if (b.length) { b[0].classList.add('todo'); }
       }
     },
+    switchExpand: function () {
+      this.$set(this.item, 'expanded', !this.item.expanded);
+    },
     deleteIfEmpty: function (e) {
       if (e.target.value || (this.item.children && this.item.children.length)) {
         return;
@@ -96,6 +102,7 @@ export default {
       this.item.children.push({
         addDt: this.formatDate(new Date(), 'YYYY-MM-DD hh:mm'),
         updDt: this.formatDate(new Date(), 'YYYY-MM-DD hh:mm'),
+        expanded: true,
         body: [
           {
             type: 0,
