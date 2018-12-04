@@ -47,12 +47,13 @@ export default {
     }
   },
   mounted () {
-    // animation
-    this.$el.classList.add('is-visible');
-    // focus on textarea
-    if (this.item.body[0].type === 0) {
-      var txt = this.$el.getElementsByClassName('memo__txt');
-      if (txt.length) { txt[0].focus(); }
+    var txt = this.$el.getElementsByClassName('memo__txt');
+    if (txt.length) {
+      // adjust height of textarea
+      txt[0].style.height = '0';
+      txt[0].style.height = txt[0].scrollHeight + 'px';
+      // focus on textarea
+      txt[0].focus();
     }
   },
   methods: {
