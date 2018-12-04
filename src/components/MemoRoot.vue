@@ -122,17 +122,20 @@ export default {
 <style lang="scss">
 $siz_space: 6px;
 $siz_radius: 4px;
-$col_base: rgb(199, 224, 216);
-$col_main: rgb(246, 250, 249);
-$col_accent: rgb(117, 172, 182);
+$col_base: rgb(238, 220, 198);
+$col_main: rgb(248, 246, 236);
+$col_accent: rgb(190, 145, 85);
 $col_font: rgb(13, 80, 134);
 $col_subfont: gray;
 .book{
+  max-width: 50em;
   background: $col_base;
   border-radius: $siz_radius;
   box-sizing: border-box;
   padding: $siz_space;
   margin-bottom: 50vh;
+  margin-left: auto;
+  margin-right: auto;
 }
 .title{
   outline: none;
@@ -205,7 +208,7 @@ $col_subfont: gray;
   }
 }
 .todo{
-  background: #fff3b1;
+  background: #fff1a2;
 }
 .v-enter-active, .v-leave-active{
   transition: all .3s ease;
