@@ -184,6 +184,9 @@ export default {
   background: rgb(117, 172, 182);
   border-radius: 5px;
 }
+.todo{
+  background: #fff3b1;
+}
 .v-enter-active, .v-leave-active{
   transition: all .3s ease;
 }

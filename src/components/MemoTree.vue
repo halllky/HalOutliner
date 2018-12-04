@@ -6,6 +6,7 @@
         <span class="memo__add" @click="addChild">
           <span class="memo__plus"></span>
         </span>
+        <span class="btn" @click="switchTodo">TD</span>
         <span style="display: none;" class="memo__delete" @click="removeThis"></span>
       </div>
       <div class="memo__body" v-for="(i, index) in item.body" :key="index">
@@ -57,6 +58,16 @@ export default {
   methods: {
     save: function () {
       this.$emit('save');
+    },
+    switchTodo: function () {
+      var b = this.$el.getElementsByClassName('memo');
+      if (this.item.todo) {
+        this.$set(this.item, 'todo', false);
+        if (b.length) { b[0].classList.remove('todo'); }
+      } else {
+        this.$set(this.item, 'todo', true);
+        if (b.length) { b[0].classList.add('todo'); }
+      }
     },
     deleteIfEmpty: function (e) {
       if (e.target.value || (this.item.children && this.item.children.length)) {
