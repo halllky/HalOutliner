@@ -114,12 +114,19 @@ export default {
   }
 }
 </script>
-<style>
+<style lang="scss">
+$siz_space: 6px;
+$siz_radius: 4px;
+$col_base: rgb(199, 224, 216);
+$col_main: rgb(246, 250, 249);
+$col_accent: rgb(117, 172, 182);
+$col_font: rgb(13, 80, 134);
+$col_subfont: gray;
 .book{
-  background: rgb(199, 224, 216);
-  border-radius: 4px;
+  background: $col_base;
+  border-radius: $siz_radius;
   box-sizing: border-box;
-  padding: 6px;
+  padding: $siz_space;
   margin-bottom: 50vh;
 }
 .title{
@@ -127,62 +134,62 @@ export default {
   border: none;
   font-size: 18px;
   min-height: 1.4em;
-  border-bottom: 1px solid gray;
+  border-bottom: 1px solid $col_accent;
   background: transparent;
 }
 .memo{
   position: relative;
-  background: rgb(246, 250, 249);
-  border-radius: 4px;
+  background: $col_main;
+  border-radius: $siz_radius;
   box-sizing: border-box;
-  padding: 6px;
-}
-.memo__header{
-  display: flex;
-  position: absolute;
-  right: 6px;
-  justify-content: flex-end;
-}
-.memo__header :not(:first-child){
-  margin-left: 6px;
-}
-.memo__body{
-  line-height: 0;
-}
-.memo__timestamp{
-  right: 0;
-  color: gray;
-  font-size: 10px;
-  cursor: default;
-  user-select: none;
-}
-.memo__children{
-  padding-left: 1.5em;
-}
-.memo__child{
-  margin-top: 6px;
-}
-.memo__txt{
-  resize: none;
-  outline: none;
-  border: none;
-  padding: 0;
-  width: 100%;
-  height: 1em;
-  min-height: 1em;
-  font-size: 14px;
-  background: transparent;
-  color: rgb(13, 80, 134);
-  font-family: "Yu Gothic", "游ゴシック", YuGothic, "游ゴシック体", "ヒラギノ角ゴ Pro W3", "メイリオ", sans-serif;
-  font-weight: 500;
-  line-height: 16px;
-}
-.memo__add{
-  min-width: 20px;
-  height: 20px;
-  display: flex;
-  background: rgb(117, 172, 182);
-  border-radius: 5px;
+  padding: $siz_space;
+  &__header{
+    display: flex;
+    position: absolute;
+    right: $siz_space;
+    justify-content: flex-end;
+  }
+  &__header :not(:first-child){
+    margin-left: $siz_space;
+  }
+  &__body{
+    line-height: 0;
+  }
+  &__children{
+    padding-left: 1.5em;
+  }
+  &__child{
+    margin-top: $siz_space;
+  }
+  &__timestamp{
+    right: 0;
+    color: $col_subfont;
+    font-size: 10px;
+    cursor: default;
+    user-select: none;
+  }
+  &__txt{
+    resize: none;
+    outline: none;
+    border: none;
+    padding: 0;
+    width: 100%;
+    height: 1em;
+    min-height: 1em;
+    font-size: 14px;
+    background: transparent;
+    color: $col_font;
+    font-family: "Yu Gothic", "游ゴシック", YuGothic, "游ゴシック体", "ヒラギノ角ゴ Pro W3", "メイリオ", sans-serif;
+    font-weight: 500;
+    line-height: 16px;
+  }
+  &__add{
+    min-width: 20px;
+    min-height: 20px;
+    display: flex;
+    background: $col_accent;
+    border-radius: $siz_radius;
+  }
 }
 .todo{
   background: #fff3b1;
@@ -202,7 +209,7 @@ export default {
   padding: 0;
   width: 4px;
   height: 16px;
-  background: rgb(246, 250, 249);
+  background: $col_main;
 }
 .memo__plus:before{
   display: block;
@@ -213,7 +220,7 @@ export default {
   width: 16px;
   height: 4px;
   margin-top: -2px;
-  background: rgb(246, 250, 249);
+  background: $col_main;
 }
 /* http://weboook.blog22.fc2.com/blog-entry-401.html */
 .memo__delete{
@@ -236,24 +243,5 @@ export default {
   height: 4px;
   margin-top: -2px;
   background: rgb(240, 141, 124);
-}
-/* https://saruwakakun.com/html-css/reference/buttons */
-.btn {
-    position: relative;
-    display: inline-block;
-    padding: 0.25em;
-    text-decoration: none;
-    color: #FFF;
-    background: #9cc0ae;/*色*/
-    border-radius: 4px;
-    box-shadow: inset 0 2px 0 rgba(255,255,255,0.2), inset 0 -2px 0 rgba(0, 0, 0, 0.05);
-    font-weight: bold;
-    border: solid 1px #859b9a;/*線色*/
-    cursor: default;
-    user-select: none;
-}
-
-.btn:active {/*押したとき*/
-    box-shadow: 0 0 2px rgba(0, 0, 0, 0.30);
 }
 </style>
