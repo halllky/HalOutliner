@@ -2,7 +2,8 @@
   <div class="book">
     <div style="text-align: right;">
       <a class="btn" @click="clear">clear</a>
-      <a class="download btn" @click="download">download</a>
+      <a class="btn download" @click="download">export</a>
+      <a class="btn" @click="restore">import</a>
     </div>
     <input
       class="title"
@@ -80,6 +81,14 @@ export default {
         const url = URL.createObjectURL(blob);
         btn[0].href = url;
         btn[0].download = this.title ? this.title : 'HalOutliner';
+      }
+    },
+    restore: function () {
+      const d = window.prompt('paset JSON here', '');
+      const j = JSON.parse(d);
+      if (j) {
+        this.title = j.title;
+        this.itemData = j.itemData;
       }
     },
     formatDate: function (date, format) {
