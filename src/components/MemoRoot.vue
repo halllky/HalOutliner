@@ -231,26 +231,4 @@ $col_subfont: gray;
   margin-top: -2px;
   background: $col_main;
 }
-/* http://weboook.blog22.fc2.com/blog-entry-401.html */
-.memo__delete{
-  display: inline-block;
-  position: relative;
-  margin: 0 7px 0 7px;
-  padding: 0;
-  width: 4px;
-  height: 20px;
-  background: rgb(240, 141, 124);
-  transform: rotate(45deg);
-}
-.memo__delete:before{
-  display: block;
-  content: "";
-  position: absolute;
-  top: 50%;
-  left: -8px;
-  width: 20px;
-  height: 4px;
-  margin-top: -2px;
-  background: rgb(240, 141, 124);
-}
 </style>

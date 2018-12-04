@@ -3,11 +3,8 @@
     <div class="memo">
       <div class="memo__header">
         <span class="memo__timestamp">{{ item.updDt }}</span>
-        <span class="btn" @click="addChild">
-          <span class="plus"></span>
-        </span>
+        <span class="btn" @click="addChild"><span class="plus"></span></span>
         <span class="btn" @click="switchTodo">todo</span>
-        <span style="display: none;" class="memo__delete" @click="removeThis"></span>
       </div>
       <div class="memo__body" v-for="(i, index) in item.body" :key="index">
         <textarea
@@ -87,11 +84,6 @@ export default {
         event.target.value = text.slice(0, pos) + '\t' + text.slice(pos);
         event.target.selectionStart = pos + 1;
         event.target.selectionEnd = pos + 1;
-      }
-    },
-    removeThis: function () {
-      if (confirm('delete?')) {
-        this.$emit('remove', this.item);
       }
     },
     removeChild: function (e) {
