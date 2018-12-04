@@ -2,15 +2,15 @@
   <div>
     <div class="memo" :class="{ todo: item.todo }">
       <div class="memo__header">
-        <span class="memo__timestamp">{{ item.updDt }}</span>
+        <span class="memo__timestamp">{{ item.addDt }}</span>
         <span class="btn" @click="addChild"><span class="plus"></span></span>
         <span class="btn" @click="switchTodo">todo</span>
         <span class="btn" @click="switchExpand">{{ item.expanded ? '-' : '+' }}</span>
       </div>
-      <div class="memo__body" v-for="(i, index) in item.body" :key="index">
+      <div class="memo__body">
         <textarea
-          v-if="i.type == 0"
-          v-model="i.val"
+          v-if="item.type === 0"
+          v-model="item.value"
           class="memo__txt"
           placeholder=""
           spellcheck="false"
@@ -18,8 +18,8 @@
           @blur="deleteIfEmpty"
           @keydown="insertTab"></textarea>
         <img
-          v-if="i.type == 1"
-          :src="i.val"
+          v-if="item.type === 1"
+          :src="item.value"
           class="memo__img">
       </div>
     </div>
@@ -92,14 +92,9 @@ export default {
       }
       this.item.children.push({
         addDt: this.formatDate(new Date(), 'YYYY-MM-DD hh:mm'),
-        updDt: this.formatDate(new Date(), 'YYYY-MM-DD hh:mm'),
         expanded: true,
-        body: [
-          {
-            type: 0,
-            val: ''
-          }
-        ]
+        type: 0,
+        value: ''
       })
     },
     changeHeight: function (e) {

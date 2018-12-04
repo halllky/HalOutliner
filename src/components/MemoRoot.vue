@@ -47,14 +47,9 @@ export default {
       // HACK: duplicate with MemoTree.vue
       this.itemData.push({
         addDt: this.formatDate(new Date(), 'YYYY-MM-DD hh:mm'),
-        updDt: this.formatDate(new Date(), 'YYYY-MM-DD hh:mm'),
         expanded: true,
-        body: [
-          {
-            type: 0,
-            val: ''
-          }
-        ]
+        type: 0,
+        value: ''
       });
     },
     save: function () {
