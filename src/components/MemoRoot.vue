@@ -1,5 +1,5 @@
 <template>
-  <div class="book">
+  <div ref="divBook" class="book">
     <div style="text-align: right;">
       <a class="btn" @click="clear">clear</a>
       <a class="btn download" @click="download">export</a>
@@ -122,9 +122,9 @@ export default {
 <style lang="scss">
 $siz_space: 6px;
 $siz_radius: 4px;
-$col_base: rgb(238, 220, 198);
-$col_main: rgb(248, 246, 236);
-$col_accent: rgb(190, 145, 85);
+$col_base: rgb(247, 236, 223);
+$col_main: rgb(253, 252, 249);
+$col_accent: rgb(196, 176, 150);
 $col_font: rgb(13, 80, 134);
 $col_subfont: gray;
 .book{
@@ -153,9 +153,16 @@ $col_subfont: gray;
   padding: $siz_space;
   &__header{
     display: flex;
-    position: absolute;
-    right: $siz_space;
     justify-content: flex-end;
+    &_outbody{
+      @extend .memo__header;
+      position: relative;
+    }
+    &_inbody{
+      @extend .memo__header;
+      position: absolute;
+      right: $siz_space;
+    }
   }
   &__header :not(:first-child){
     margin-left: $siz_space;
@@ -208,7 +215,7 @@ $col_subfont: gray;
   }
 }
 .todo{
-  background: #fff1a2;
+  background: #fff7c6;
 }
 .v-enter-active, .v-leave-active{
   transition: all .3s ease;

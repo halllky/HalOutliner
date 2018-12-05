@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="memo" :class="{ todo: item.todo }">
-      <div class="memo__header">
+      <div ref="divHeader">
         <span class="memo__timestamp">{{ item.addDt }}</span>
         <span class="btn" @click="addChild"><span class="plus"></span></span>
         <span class="btn" @click="switchTodo">todo</span>
@@ -11,6 +11,7 @@
       </div>
       <div class="memo__body">
         <textarea
+          ref="txtBody"
           v-if="item.type === 0"
           v-model="item.value"
           class="memo__txt"
@@ -47,14 +48,14 @@ export default {
     }
   },
   mounted () {
-    var txt = this.$el.getElementsByClassName('memo__txt');
-    if (txt.length) {
-      // adjust height of textarea
-      txt[0].style.height = '0';
-      txt[0].style.height = txt[0].scrollHeight + 'px';
-      // focus on textarea
-      txt[0].focus();
-    }
+    // switch header class where the view area is wide or not
+    const iswide = this.$refs.divHeader.clientWidth > 500;
+    this.$refs.divHeader.classList.add(iswide ? 'memo__header_inbody' : 'memo__header_outbody');
+    // adjust height of textarea
+    this.$refs.txtBody.style.height = '0';
+    this.$refs.txtBody.style.height = this.$refs.txtBody.scrollHeight + 'px';
+    // focus on textarea
+    this.$refs.txtBody.focus();
   },
   methods: {
     save: function () {
