@@ -29,7 +29,7 @@ export default {
   },
   methods: {
     onLeave (e) {
-      this.$emit('blur', e);
+      this.$emit('leave', e);
     },
     onInput (e) {
       // change height

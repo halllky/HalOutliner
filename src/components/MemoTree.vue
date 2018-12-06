@@ -14,7 +14,8 @@
           v-if="item.type === 0"
           v-model="item.value"
           cssclass="memo__txt"
-          @textchange="onTextChanged"></stretchable-textarea>
+          @textchange="save"
+          @leave="deleteIfEmpty"></stretchable-textarea>
         <img
           v-if="item.type === 1"
           :src="item.value"
@@ -27,7 +28,7 @@
           <memo-tree
             :item="c"
             @remove="removeChild($event); save();"
-            @save="save();"></memo-tree>
+            @save="save"></memo-tree>
         </div>
       </transition-group>
     </div>
@@ -56,11 +57,6 @@ export default {
     },
     switchTodo: function () {
       this.$set(this.item, 'todo', !this.item.todo);
-    },
-    onTextChanged (e, v) {
-      // delete if empty
-      if (!e.data) this.removeChild(v);
-      this.save();
     },
     switchExpand: function () {
       if (this.item.children) {
