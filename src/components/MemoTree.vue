@@ -52,29 +52,29 @@ export default {
     this.$refs.divHeader.classList.add(iswide ? 'memo__header_inbody' : 'memo__header_outbody');
   },
   methods: {
-    save: function () {
+    save () {
       this.$emit('save');
     },
     switchTodo: function () {
       this.$set(this.item, 'todo', !this.item.todo);
     },
-    switchExpand: function () {
+    switchExpand () {
       if (this.item.children) {
         this.$set(this.item, 'expanded', !this.item.expanded);
       } else {
         this.$set(this.item, 'expanded', true);
       }
     },
-    deleteIfEmpty: function (e) {
+    deleteIfEmpty (e) {
       if (e.target.value || (this.item.children && this.item.children.length)) {
         return;
       }
       this.$emit('remove', this.item);
     },
-    removeChild: function (e) {
+    removeChild (e) {
       this.item.children = this.item.children.filter(c => c !== e);
     },
-    addChild: function () {
+    addChild () {
       if (this.item.children === undefined) {
         this.$set(this.item, 'children', []);
       }
@@ -86,11 +86,7 @@ export default {
       })
       this.$set(this.item, 'expanded', true);
     },
-    changeHeight: function (e) {
-      e.target.style.height = '0';
-      e.target.style.height = e.target.scrollHeight + 'px';
-    },
-    formatDate: function (date, format) {
+    formatDate (date, format) {
       // https://qiita.com/osakanafish/items/c64fe8a34e7221e811d0
       if (!format) format = 'YYYY-MM-DD hh:mm:ss.SSS';
       format = format.replace(/YYYY/g, date.getFullYear());

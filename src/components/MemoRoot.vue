@@ -39,11 +39,11 @@ export default {
     }
   },
   methods: {
-    removeChild: function (e) {
+    removeChild (e) {
       // HACK: duplicate with MemoTree.vue
       this.itemData = this.itemData.filter(c => c !== e);
     },
-    addRootMemo: function () {
+    addRootMemo () {
       // HACK: duplicate with MemoTree.vue
       this.itemData.push({
         addDt: this.formatDate(new Date(), 'YYYY-MM-DD hh:mm'),
@@ -52,20 +52,20 @@ export default {
         value: ''
       });
     },
-    save: function () {
+    save () {
       const d = JSON.stringify({
         title: this.title,
         itemData: this.itemData
       })
       localStorage.setItem('halOutliner', d);
     },
-    clear: function () {
+    clear () {
       if (confirm('clear?')) {
         this.title = '';
         this.itemData = [];
       }
     },
-    download: function () {
+    download () {
       const d = JSON.stringify({
         title: this.title,
         itemData: this.itemData
@@ -78,7 +78,7 @@ export default {
         btn[0].download = this.title ? this.title : 'HalOutliner';
       }
     },
-    restore: function () {
+    restore () {
       const d = window.prompt('paset JSON here', '');
       const j = JSON.parse(d);
       if (j) {
@@ -86,7 +86,7 @@ export default {
         this.itemData = j.itemData;
       }
     },
-    formatDate: function (date, format) {
+    formatDate (date, format) {
       // HACK: duplicate with MemoTree.vue
       // https://qiita.com/osakanafish/items/c64fe8a34e7221e811d0
       if (!format) format = 'YYYY-MM-DD hh:mm:ss.SSS';

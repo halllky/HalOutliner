@@ -1,7 +1,6 @@
 <template>
   <textarea
     v-model="_value"
-    placeholder="empty"
     spellcheck="false"
     :class="cssclass"
     @input="onInput($event);"
@@ -18,9 +17,7 @@ export default {
   computed: {
     _value: {
       get () { return this.value; },
-      set (v) {
-        this.$emit('input', v);
-      }
+      set (v) { this.$emit('input', v); }
     }
   },
   mounted () {
@@ -39,7 +36,7 @@ export default {
       this.$emit('textchange', e, this);
     },
     insertTab (e) {
-      // Tabキーを押したときは次の項目に移るのでなくスペース4個入力
+      // insert TAB
       if (e.keyCode === 9) {
         if (e.preventDefault) {
           e.preventDefault();
