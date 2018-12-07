@@ -10,12 +10,12 @@
       type="text"
       placeholder="title"
       spellcheck="false"
-      v-model="title"
+      v-model="value"
       @input="save">
     <transition-group>
-      <div v-for="(i, index) in itemData" :key="index">
+      <div v-for="(c, index) in children" :key="index">
         <memo-tree
-          :item="i"
+          :item="c"
           class="memo__child"
           @remove="removeChild($event); save();"
           @save="save"></memo-tree>
@@ -34,18 +34,21 @@ export default {
   components: { MemoTree },
   data () {
     return {
-      title: '',
-      itemData: []
+      addDt: this.formatDate(new Date(), 'YYYY-MM-DD hh:mm'),
+      expanded: true,
+      type: 0,
+      value: '',
+      children: []
     }
   },
   methods: {
     removeChild (e) {
       // HACK: duplicate with MemoTree.vue
-      this.itemData = this.itemData.filter(c => c !== e);
+      this.children = this.children.filter(c => c !== e);
     },
     addRootMemo () {
       // HACK: duplicate with MemoTree.vue
-      this.itemData.push({
+      this.children.push({
         addDt: this.formatDate(new Date(), 'YYYY-MM-DD hh:mm'),
         expanded: true,
         type: 0,
@@ -54,36 +57,36 @@ export default {
     },
     save () {
       const d = JSON.stringify({
-        title: this.title,
-        itemData: this.itemData
+        value: this.value,
+        children: this.children
       })
       localStorage.setItem('halOutliner', d);
     },
     clear () {
       if (confirm('clear?')) {
-        this.title = '';
-        this.itemData = [];
+        this.value = '';
+        this.children = [];
       }
     },
     download () {
       const d = JSON.stringify({
-        title: this.title,
-        itemData: this.itemData
+        value: this.value,
+        children: this.children
       })
       const btn = this.$el.getElementsByClassName('download');
       if (btn) {
         const blob = new Blob([d], {type: 'application/json'});
         const url = URL.createObjectURL(blob);
         btn[0].href = url;
-        btn[0].download = this.title ? this.title : 'HalOutliner';
+        btn[0].download = this.value ? this.value : 'HalOutliner';
       }
     },
     restore () {
       const d = window.prompt('paset JSON here', '');
       const j = JSON.parse(d);
       if (j) {
-        this.title = j.title;
-        this.itemData = j.itemData;
+        this.value = j.value;
+        this.children = j.children;
       }
     },
     formatDate (date, format) {
@@ -109,8 +112,8 @@ export default {
     const strSavedata = localStorage.getItem('halOutliner');
     if (strSavedata !== null) {
       const d = JSON.parse(strSavedata);
-      this.title = d.title;
-      this.itemData = d.itemData;
+      this.value = d.value;
+      this.children = d.children;
     }
     // alert try to leave this page
     window.addEventListener('beforeunload', function (e) {
