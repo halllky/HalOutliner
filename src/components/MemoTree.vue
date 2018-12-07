@@ -22,16 +22,18 @@
           class="memo__img">
       </div>
     </div>
-    <div class="memo__children" v-show="item.expanded">
-      <transition-group>
-        <div class="memo__child" v-for="(c, index) in item.children" :key="index">
-          <memo-tree
-            :item="c"
-            @remove="removeChild($event); save();"
-            @save="save"></memo-tree>
-        </div>
-      </transition-group>
-    </div>
+    <transition>
+      <div class="memo__children" v-if="item.expanded">
+        <transition-group>
+          <div class="memo__child" v-for="(c, index) in item.children" :key="index">
+            <memo-tree
+              :item="c"
+              @remove="removeChild($event); save();"
+              @save="save"></memo-tree>
+          </div>
+        </transition-group>
+      </div>
+    </transition>
   </div>
 </template>
 <script>
