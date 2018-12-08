@@ -23,6 +23,11 @@ export default {
   mounted () {
     this.$el.style.height = '0';
     this.$el.style.height = this.$el.scrollHeight + 'px';
+    // select textarea on constructed
+    // HACK: also selected when page loaded or expanded with no child
+    if (this.$el.value.length === 0) {
+      this.$el.select();
+    }
   },
   methods: {
     onLeave (e) {
