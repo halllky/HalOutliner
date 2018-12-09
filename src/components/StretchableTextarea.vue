@@ -2,10 +2,12 @@
   <textarea
     v-model="_value"
     spellcheck="false"
+    contenteditable="true"
     :class="cssclass"
     @input="onInput($event);"
     @blur="onLeave"
-    @keydown="insertTab"></textarea>
+    @keydown="insertTab"
+    @paste="onPaste"></textarea>
 </template>
 <script>
 export default {
@@ -39,6 +41,11 @@ export default {
       this.$el.style.height = this.$el.scrollHeight + 'px';
       // emit
       this.$emit('textchange', e, this);
+    },
+    onPaste (e) {
+      if (e.clipboardData.types[1] === 'Files') {
+        this.$emit('imagepasted', e);
+      }
     },
     insertTab (e) {
       // insert TAB

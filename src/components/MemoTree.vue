@@ -3,7 +3,7 @@
     <div class="memo" :class="{ todo: item.todo }">
       <div ref="divHeader">
         <span class="memo__timestamp">{{ item.addDt }}</span>
-        <span class="btn" @click="addChild"><span class="plus"></span></span>
+        <span class="btn" @click="addChild(0, '')"><span class="plus"></span></span>
         <span class="btn" @click="switchTodo">todo</span>
         <span class="btn" @click="switchExpand" style="min-width: 20px;">
           {{ item.expanded ? '-' : item.children ? item.children.length : '0' }}
@@ -15,7 +15,8 @@
           v-model="item.value"
           cssclass="memo__txt"
           @textchange="save"
-          @leave="deleteIfEmpty"></stretchable-textarea>
+          @leave="deleteIfEmpty"
+          @imagepasted="addChildImage"></stretchable-textarea>
         <img
           v-if="item.type === 1"
           :src="item.value"
@@ -76,17 +77,27 @@ export default {
     removeChild (e) {
       this.item.children = this.item.children.filter(c => c !== e);
     },
-    addChild () {
+    addChild (type, value) {
       if (this.item.children === undefined) {
         this.$set(this.item, 'children', []);
       }
       this.item.children.push({
         addDt: this.formatDate(new Date(), 'YYYY-MM-DD hh:mm'),
         expanded: true,
-        type: 0,
-        value: ''
+        type: type,
+        value: value
       })
       this.$set(this.item, 'expanded', true);
+    },
+    addChildImage (e) {
+      const vm = this;
+      Array.from(e.clipboardData.files).forEach(i => {
+        const fr = new FileReader();
+        fr.onload = function () {
+          vm.addChild(1, fr.result);
+        }
+        fr.readAsDataURL(i);
+      });
     },
     formatDate (date, format) {
       // https://qiita.com/osakanafish/items/c64fe8a34e7221e811d0
