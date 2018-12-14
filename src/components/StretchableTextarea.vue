@@ -44,7 +44,7 @@ export default {
     },
     onPaste (e) {
       Array.from(e.clipboardData.files)
-        .filter(f => f.type.indexOf('image/') > 0)
+        .filter(f => f.type.indexOf('image/') >= 0)
         .forEach(i => {
           this.$emit('imagepasted', i);
         });
