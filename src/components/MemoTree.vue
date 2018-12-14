@@ -91,13 +91,11 @@ export default {
     },
     addChildImage (e) {
       const vm = this;
-      Array.from(e.clipboardData.files).forEach(i => {
-        const fr = new FileReader();
-        fr.onload = function () {
-          vm.addChild(1, fr.result);
-        }
-        fr.readAsDataURL(i);
-      });
+      const fr = new FileReader();
+      fr.onload = function () {
+        vm.addChild(1, fr.result);
+      }
+      fr.readAsDataURL(e);
     },
     formatDate (date, format) {
       // https://qiita.com/osakanafish/items/c64fe8a34e7221e811d0

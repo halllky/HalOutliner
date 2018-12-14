@@ -43,9 +43,11 @@ export default {
       this.$emit('textchange', e, this);
     },
     onPaste (e) {
-      if (e.clipboardData.types[1] === 'Files') {
-        this.$emit('imagepasted', e);
-      }
+      Array.from(e.clipboardData.files)
+        .filter(f => f.type.indexOf('image/') > 0)
+        .forEach(i => {
+          this.$emit('imagepasted', i);
+        });
     },
     insertTab (e) {
       // insert TAB
