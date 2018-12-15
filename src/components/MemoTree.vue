@@ -1,11 +1,11 @@
 <template>
   <div>
-    <div class="memo" :class="{ todo: item.todo }">
+    <div class="memo" :class="{ todo: item.todo === 1 }">
       <span class="icon__todo" v-if="showTodoIcon">！</span>
       <div ref="divHeader">
         <span class="memo__timestamp">{{ item.addDt }}</span>
         <span class="btn" @click="addChild(0, '')"><span class="plus"></span></span>
-        <span class="btn" @click="switchTodo">todo</span>
+        <span class="btn" @click="switchTodo">{{ todoButtonText }}</span>
         <span class="btn" @click="switchExpand" style="min-width: 20px;">
           {{ item.expanded ? '-' : item.children ? item.children.length : '0' }}
         </span>
@@ -14,7 +14,7 @@
         <stretchable-textarea
           v-if="item.type === 0"
           v-model="item.value"
-          cssclass="memo__txt"
+          :strike="item.todo === 2"
           @textchange="save"
           @leave="deleteIfEmpty"
           @imagepasted="addChildImage">
@@ -61,7 +61,7 @@ export default {
     showTodoIcon: {
       get () {
         function hasTodo (parent) {
-          if (parent.todo) return true;
+          if (parent.todo === 1) return true;
           if (parent.children !== undefined) {
             let i = parent.children.filter(c => hasTodo(c));
             if (i.length > 0) return true;
@@ -69,6 +69,16 @@ export default {
           return false;
         }
         return hasTodo(this.item);
+      }
+    },
+    todoButtonText: {
+      get () {
+        // show not current name, but next name
+        switch (this.item.todo) {
+          case 1: return 'done';
+          case 2: return 'reset';
+          default: return 'todo';
+        }
       }
     }
   },
@@ -82,7 +92,13 @@ export default {
       this.$emit('save');
     },
     switchTodo: function () {
-      this.$set(this.item, 'todo', !this.item.todo);
+      let t;
+      switch (this.item.todo) {
+        case 1: t = 2; break;
+        case 2: t = 0; break;
+        default: t = 1; break;
+      }
+      this.$set(this.item, 'todo', t);
     },
     switchExpand () {
       if (this.item.children) {

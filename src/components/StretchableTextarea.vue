@@ -3,7 +3,8 @@
     v-model="_value"
     spellcheck="false"
     contenteditable="true"
-    :class="cssclass"
+    class="memo__txt"
+    :class="{ memo__txt_strike: strike }"
     @input="onInput($event);"
     @blur="onLeave"
     @keydown="insertTab"
@@ -14,7 +15,7 @@ export default {
   name: 'StretchableTextarea',
   props: {
     value: String,
-    cssclass: String
+    strike: Boolean
   },
   computed: {
     _value: {

@@ -129,6 +129,7 @@ $col_base: rgb(247, 236, 223);
 $col_main: rgb(253, 252, 249);
 $col_accent: rgb(196, 176, 150);
 $col_font: rgb(13, 80, 134);
+$col_font_strike: rgb(209, 209, 209);
 $col_subfont: gray;
 $col_dangerous: rgb(233, 120, 120);
 $col_todo: rgb(236, 178, 17);
@@ -205,6 +206,10 @@ $col_todo_back: #fff7c6;
     font-family: "Yu Gothic", "游ゴシック", YuGothic, "游ゴシック体", "ヒラギノ角ゴ Pro W3", "メイリオ", sans-serif;
     font-weight: 500;
     line-height: 16px;
+    &_strike{
+      color: $col_font_strike;
+      text-decoration-line: line-through;
+    }
   }
   &__img{
     max-width: 90%;
@@ -254,6 +259,9 @@ $col_todo_back: #fff7c6;
 }
 .todo{
   background: $col_todo_back;
+}
+.done{
+  color: $col_font_strike;
 }
 .v-enter-active, .v-leave-active{
   transition: all .3s ease;
