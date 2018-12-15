@@ -24,9 +24,7 @@ export default {
     }
   },
   mounted () {
-    // change height
-    this.$el.style.height = '0';
-    this.$el.style.height = this.$el.scrollHeight + 'px';
+    this.resize();
     // select textarea on constructed
     // HACK: also selected when page loaded or expanded with no child
     if (this.$el.value.length === 0) {
@@ -38,10 +36,7 @@ export default {
       this.$emit('leave', e);
     },
     onInput (e) {
-      // change height
-      this.$el.style.height = '0';
-      this.$el.style.height = this.$el.scrollHeight + 'px';
-
+      this.resize();
       this.$emit('textchange', e, this);
     },
     onPaste (e) {
@@ -50,6 +45,10 @@ export default {
         .forEach(i => {
           this.$emit('imagepasted', i);
         });
+    },
+    resize () {
+      this.$el.style.height = '0';
+      this.$el.style.height = this.$el.scrollHeight + 'px';
     },
     insertTab (e) {
       // insert TAB
