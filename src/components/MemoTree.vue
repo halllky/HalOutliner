@@ -16,11 +16,13 @@
           cssclass="memo__txt"
           @textchange="save"
           @leave="deleteIfEmpty"
-          @imagepasted="addChildImage"></stretchable-textarea>
-        <img
+          @imagepasted="addChildImage">
+        </stretchable-textarea>
+        <stretchable-image
           v-if="item.type === 1"
-          :src="item.value"
-          class="memo__img">
+          :value="item.value"
+          cssclass="memo__img">
+        </stretchable-image>
       </div>
     </div>
     <transition>
@@ -39,10 +41,14 @@
 </template>
 <script>
 import StretchableTextarea from './StretchableTextarea';
+import StretchableImage from './StretchableImage';
 
 export default {
   name: 'MemoTree',
-  components: { StretchableTextarea },
+  components: {
+    StretchableTextarea,
+    StretchableImage
+  },
   props: {
     item: {
       type: Object,
