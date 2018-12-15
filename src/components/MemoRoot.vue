@@ -108,14 +108,14 @@ export default {
     }
   },
   created () {
-    // load
+    // load from localStorage
     const strSavedata = localStorage.getItem('halOutliner');
     if (strSavedata !== null) {
       const d = JSON.parse(strSavedata);
       this.value = d.value;
       this.children = d.children;
     }
-    // alert try to leave this page
+    // alert when try to leave this page
     window.addEventListener('beforeunload', function (e) {
       e.returnValue = 'caution!';
     }, false);

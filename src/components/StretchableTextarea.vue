@@ -24,6 +24,7 @@ export default {
     }
   },
   mounted () {
+    // change height
     this.$el.style.height = '0';
     this.$el.style.height = this.$el.scrollHeight + 'px';
     // select textarea on constructed
@@ -40,7 +41,7 @@ export default {
       // change height
       this.$el.style.height = '0';
       this.$el.style.height = this.$el.scrollHeight + 'px';
-      // emit
+
       this.$emit('textchange', e, this);
     },
     onPaste (e) {

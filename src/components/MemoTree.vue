@@ -94,9 +94,9 @@ export default {
     switchTodo: function () {
       let t;
       switch (this.item.todo) {
-        case 1: t = 2; break;
-        case 2: t = 0; break;
-        default: t = 1; break;
+        case 1: t = 2; break; // todo -> done
+        case 2: t = 0; break; // done -> normal
+        default: t = 1; break;// normal -> todo
       }
       this.$set(this.item, 'todo', t);
     },
