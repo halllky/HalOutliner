@@ -1,14 +1,14 @@
 <template>
-  <div>
+  <li>
     <div class="memo" :class="{ todo: item.todo === 1 }">
       <span class="icon__todo" v-if="showTodoIcon">！</span>
       <div ref="divHeader">
         <span class="memo__timestamp">{{ item.addDt }}</span>
-        <span class="btn" @click="addChild(0, '')"><span class="plus"></span></span>
-        <span class="btn" @click="switchTodo">{{ todoButtonText }}</span>
-        <span class="btn" @click="switchExpand" style="min-width: 20px;">
+        <a class="btn" @click="addChild(0, '')"><span class="plus"></span></a>
+        <a class="btn" @click="switchTodo">{{ todoButtonText }}</a>
+        <a class="btn" @click="switchExpand" style="min-width: 20px;">
           {{ item.expanded ? '-' : item.children ? item.children.length : '0' }}
-        </span>
+        </a>
       </div>
       <div class="memo__body">
         <stretchable-textarea
@@ -27,19 +27,17 @@
         </stretchable-image>
       </div>
     </div>
-    <transition>
-      <div class="memo__children" v-if="item.expanded">
-        <transition-group>
-          <div class="memo__child" v-for="(c, index) in item.children" :key="index">
-            <memo-tree
-              :item="c"
-              @remove="removeChild($event); save();"
-              @save="save"></memo-tree>
-          </div>
-        </transition-group>
-      </div>
-    </transition>
-  </div>
+    <transition-group tag="ul" class="memo__children" v-if="item.expanded">
+      <memo-tree
+        v-for="(c, index) in item.children"
+        :key="index"
+        :item="c"
+        class="memo__child"
+        @remove="removeChild($event); save();"
+        @save="save">
+      </memo-tree>
+    </transition-group>
+  </li>
 </template>
 <script>
 import StretchableTextarea from './StretchableTextarea';

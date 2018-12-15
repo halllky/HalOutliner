@@ -12,18 +12,19 @@
       spellcheck="false"
       v-model="value"
       @input="save">
-    <transition-group>
-      <div v-for="(c, index) in children" :key="index">
-        <memo-tree
-          :item="c"
-          class="memo__child"
-          @remove="removeChild($event); save();"
-          @save="save"></memo-tree>
-      </div>
+    <transition-group tag="ul" class="memo__children" style="padding-left: 0;">
+      <memo-tree
+        v-for="(c, index) in children"
+        :key="index"
+        :item="c"
+        class="memo__child"
+        @remove="removeChild($event); save();"
+        @save="save">
+      </memo-tree>
     </transition-group>
-    <div class="btn memo__child" @click="addRootMemo">
+    <a class="btn memo__child" @click="addRootMemo">
       <span class="plus"></span>
-    </div>
+    </a>
   </div>
 </template>
 <script>
@@ -178,9 +179,11 @@ $col_todo_back: #fff7c6;
     line-height: 0;
   }
   &__children{
+    margin: auto;
     padding-left: 1.5em;
   }
   &__child{
+    list-style-type: none;
     width: 100%;
     box-sizing: border-box;
     margin-top: $siz_space;
