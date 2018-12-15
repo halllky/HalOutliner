@@ -1,6 +1,7 @@
 <template>
   <div>
     <div class="memo" :class="{ todo: item.todo }">
+      <span class="icon__todo" v-if="item.todo">！</span>
       <div ref="divHeader">
         <span class="memo__timestamp">{{ item.addDt }}</span>
         <span class="btn" @click="addChild(0, '')"><span class="plus"></span></span>
