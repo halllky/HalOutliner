@@ -21,7 +21,8 @@
         <stretchable-image
           v-if="item.type === 1"
           :value="item.value"
-          cssclass="memo__img">
+          cssclass="memo__img"
+          @deleted="deleteMe">
         </stretchable-image>
       </div>
     </div>
@@ -74,11 +75,14 @@ export default {
         this.$set(this.item, 'expanded', true);
       }
     },
+    deleteMe () {
+      this.$emit('remove', this.item);
+    },
     deleteIfEmpty (e) {
       if (e.target.value || (this.item.children && this.item.children.length)) {
         return;
       }
-      this.$emit('remove', this.item);
+      this.deleteMe();
     },
     removeChild (e) {
       this.item.children = this.item.children.filter(c => c !== e);

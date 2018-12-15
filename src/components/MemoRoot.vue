@@ -130,6 +130,7 @@ $col_main: rgb(253, 252, 249);
 $col_accent: rgb(196, 176, 150);
 $col_font: rgb(13, 80, 134);
 $col_subfont: gray;
+$col_red: rgb(233, 120, 120);
 .book{
   max-width: 50em;
   background: $col_base;
@@ -177,6 +178,8 @@ $col_subfont: gray;
     padding-left: 1.5em;
   }
   &__child{
+    width: 100%;
+    box-sizing: border-box;
     margin-top: $siz_space;
   }
   &__timestamp{
@@ -201,11 +204,14 @@ $col_subfont: gray;
     font-weight: 500;
     line-height: 16px;
   }
+  &__img{
+    max-width: 90%;
+  }
 }
 .btn{
+  display: inline-block;
   min-width: 20px;
   min-height: 20px;
-  padding: 0px 2px;
   background: $col_accent;
   color: $col_main;
   border-radius: $siz_radius;
@@ -215,6 +221,15 @@ $col_subfont: gray;
   &:active{
     background: darken($col_accent, 10%);
     transform: translateY(1px);
+  }
+  &__delete_image{
+    @extend .btn;
+    position: relative;
+    vertical-align: top;
+    background: $col_red;
+    &:active{
+      background: darken($col_red, 10%);
+    }
   }
 }
 .todo{
@@ -248,5 +263,13 @@ $col_subfont: gray;
   height: 4px;
   margin-top: -2px;
   background: $col_main;
+}
+.cross{
+  @extend .plus;
+  transform: rotate(-45deg) translateY(3px);
+  -moz-transform: rotate(-45deg);
+  -webkit-transform: rotate(-45deg);
+  -o-transform: rotate(-45deg);
+  -ms-transform: rotate(-45deg);
 }
 </style>
