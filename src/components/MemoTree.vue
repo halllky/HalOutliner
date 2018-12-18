@@ -58,15 +58,20 @@ export default {
   computed: {
     showTodoIcon: {
       get () {
-        function hasTodo (parent) {
+        function hasTodoChild (parent) {
           if (parent.todo === 1) return true;
           if (parent.children !== undefined) {
-            let i = parent.children.filter(c => hasTodo(c));
+            let i = parent.children.filter(c => hasTodoChild(c));
             if (i.length > 0) return true;
           }
           return false;
         }
-        return hasTodo(this.item);
+        if (this.item.todo === 1) {
+          return true;
+        } else {
+          return !this.item.expanded &&
+            hasTodoChild(this.item);
+        }
       }
     },
     todoButtonText: {
