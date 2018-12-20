@@ -15,6 +15,7 @@
           v-if="item.type === 0"
           v-model="item.value"
           :strike="item.todo === 2"
+          ref="textItem"
           @textchange="save"
           @leave="deleteIfEmpty"
           @imagepasted="addChildImage">
@@ -32,6 +33,7 @@
         v-for="(c, index) in item.children"
         :key="index"
         :item="c"
+        ref="childItem"
         class="memo__child"
         @remove="removeChild($event); save();"
         @save="save">
@@ -121,6 +123,14 @@ export default {
     },
     removeChild (e) {
       this.item.children = this.item.children.filter(c => c !== e);
+      // 'mounted' (= resizing textarea) dont work when part of v-for array is removed
+      const vm = this;
+      function delayResize () {
+        for (let i = 0; i < vm.$refs.childItem.length; i++) {
+          vm.$refs.childItem[i].resize();
+        }
+      }
+      window.setTimeout(delayResize, 10);
     },
     addChild (type, value) {
       if (this.item.children === undefined) {
@@ -141,6 +151,9 @@ export default {
         vm.addChild(1, fr.result);
       }
       fr.readAsDataURL(e);
+    },
+    resize () {
+      this.$refs.textItem.resize();
     },
     formatDate (date, format) {
       // https://qiita.com/osakanafish/items/c64fe8a34e7221e811d0
