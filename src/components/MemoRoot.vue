@@ -18,6 +18,7 @@
         v-for="(c, index) in children"
         :key="index"
         :item="c"
+        ref="childItem"
         class="memo__child"
         @remove="removeChild($event); save();"
         @save="save">
@@ -48,6 +49,14 @@ export default {
     removeChild (e) {
       // HACK: duplicate with MemoTree.vue
       this.children = this.children.filter(c => c !== e);
+      // 'mounted' (= resizing textarea) dont work when part of v-for array is removed
+      const vm = this;
+      function delayResize () {
+        for (let i = 0; i < vm.$refs.childItem.length; i++) {
+          vm.$refs.childItem[i].resize();
+        }
+      }
+      window.setTimeout(delayResize, 10);
     },
     addRootMemo () {
       // HACK: duplicate with MemoTree.vue
