@@ -15,7 +15,7 @@
       @input="save">
     <transition-group tag="ul" class="memo__children" style="padding-left: 0;">
       <memo-tree
-        v-for="(c, index) in children"
+        v-for="(c, index) in filteredChildren"
         :key="index"
         :item="c"
         ref="childItem"
@@ -42,7 +42,26 @@ export default {
       expanded: true,
       type: 0,
       value: '',
-      children: []
+      children: [],
+      searchTerm: ''
+    }
+  },
+  computed: {
+    filteredChildren () {
+      const term = this.searchTerm;
+      function isHit (parent) {
+        if (parent.value.indexOf(term) >= 0) return true;
+        if (parent.children !== undefined) {
+          let i = parent.children.filter(c => isHit(c));
+          if (i.length > 0) return true;
+        }
+        return false;
+      }
+      if (term) {
+        return this.children.filter(c => isHit(c));
+      } else {
+        return this.children;
+      }
     }
   },
   methods: {
@@ -102,7 +121,7 @@ export default {
       }
     },
     search (term) {
-      // filtering memo by term
+      this.searchTerm = term;
     },
     formatDate (date, format) {
       // HACK: duplicate with MemoTree.vue
