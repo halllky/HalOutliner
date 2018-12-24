@@ -65,19 +65,20 @@ export default {
     }
   },
   methods: {
+    delayResize () {
+      for (let i = 0; i < this.$refs.childItem.length; i++) {
+        this.$refs.childItem[i].resize();
+      }
+    },
     removeChild (e) {
       // HACK: duplicate with MemoTree.vue
       this.children = this.children.filter(c => c !== e);
       // 'mounted' (= resizing textarea) dont work when part of v-for array is removed
-      const vm = this;
-      function delayResize () {
-        for (let i = 0; i < vm.$refs.childItem.length; i++) {
-          vm.$refs.childItem[i].resize();
-        }
-      }
-      window.setTimeout(delayResize, 10);
+      window.setTimeout(this.delayResize, 10);
     },
     addRootMemo () {
+      // clear search condition
+      this.search('');
       // HACK: duplicate with MemoTree.vue
       this.children.push({
         addDt: this.formatDate(new Date(), 'YYYY-MM-DD hh:mm'),
@@ -122,6 +123,7 @@ export default {
     },
     search (term) {
       this.searchTerm = term;
+      window.setTimeout(this.delayResize, 10);
     },
     formatDate (date, format) {
       // HACK: duplicate with MemoTree.vue
