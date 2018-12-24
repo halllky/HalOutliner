@@ -155,17 +155,6 @@ export default {
     resize () {
       this.$refs.textItem.resize();
     },
-    isHitsSearch (term) {
-      function hasTerm (parent) {
-        if (parent.value.indexOf(term) >= 0) return true;
-        if (parent.children !== undefined) {
-          let i = parent.children.filter(c => hasTerm(c));
-          if (i.length > 0) return true;
-        }
-        return false;
-      }
-      return hasTerm(this.item);
-    },
     formatDate (date, format) {
       // https://qiita.com/osakanafish/items/c64fe8a34e7221e811d0
       if (!format) format = 'YYYY-MM-DD hh:mm:ss.SSS';
