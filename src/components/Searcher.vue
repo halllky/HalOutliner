@@ -1,23 +1,20 @@
 <template>
   <span>
-    <input type="text" v-model="word">
+    <input type="text" v-model="searchTerm">
     <a class="btn" @click="search">search</a>
   </span>
 </template>
 <script>
 export default {
   name: 'Searcher',
-  props: {
-    from: Object
-  },
   data () {
     return {
-      word: ''
+      searchTerm: ''
     }
   },
   methods: {
     search () {
-      // todo: make this function
+      this.$emit('search', this.searchTerm);
     }
   }
 }

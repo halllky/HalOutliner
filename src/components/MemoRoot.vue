@@ -1,7 +1,7 @@
 <template>
   <div ref="divBook" class="book">
     <div style="text-align: right;">
-      <searcher :from="children"></searcher>
+      <searcher @search="search"></searcher>
       <a class="btn" @click="clear">clear</a>
       <a class="btn download" @click="download">export</a>
       <a class="btn" @click="restore">import</a>
@@ -100,6 +100,9 @@ export default {
         this.value = j.value;
         this.children = j.children;
       }
+    },
+    search (term) {
+      // filtering memo by term
     },
     formatDate (date, format) {
       // HACK: duplicate with MemoTree.vue
