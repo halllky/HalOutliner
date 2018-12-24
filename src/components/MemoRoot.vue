@@ -13,7 +13,7 @@
       spellcheck="false"
       v-model="value"
       @input="save">
-    <transition-group tag="ul" class="memo__children" style="padding-left: 0;">
+    <ul class="memo__children" style="padding-left: 0;">
       <memo-tree
         v-for="(c, index) in filteredChildren"
         :key="index"
@@ -23,7 +23,7 @@
         @remove="removeChild($event); save();"
         @save="save">
       </memo-tree>
-    </transition-group>
+    </ul>
     <a class="btn memo__child" @click="addRootMemo">
       <span class="plus"></span>
     </a>
