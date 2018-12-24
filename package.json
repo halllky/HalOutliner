@@ -11,9 +11,11 @@
     "build": "node build/build.js"
   },
   "dependencies": {
+    "es6-promise": "^4.2.5",
     "node-sass": "^4.10.0",
     "sass-loader": "^7.1.0",
-    "vue": "^2.5.2"
+    "vue": "^2.5.2",
+    "vuex": "^3.0.1"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.2",
