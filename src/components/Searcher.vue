@@ -1,6 +1,6 @@
 <template>
   <span>
-    <input type="text" v-model="searchTerm">
+    <input type="text" v-model="searchTerm" @blur="onBlur">
     <a class="btn" @click="search">search</a>
   </span>
 </template>
@@ -13,6 +13,9 @@ export default {
     }
   },
   methods: {
+    onBlur () {
+      if (this.searchTerm.length === 0) this.$emit('search', '');
+    },
     search () {
       this.$emit('search', this.searchTerm);
     }
