@@ -15,3 +15,6 @@ yarn-error.log*
 
 # Cordova distribution file
 /www/
+/platforms/android/.gradle/
+/platforms/android/app/build/
+/platforms/android/CordovaLib/build/
