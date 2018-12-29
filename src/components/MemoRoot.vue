@@ -7,6 +7,7 @@
       </label>
       <a class="btn" @click="clear">clear</a>
       <a class="btn download" @click="download">export</a>
+      <input type="hidden" id="hdnDLObject" ref="hdnDLObject">
       <a class="btn" @click="restore">import</a>
     </div>
     <input
@@ -105,16 +106,15 @@ export default {
       }
     },
     download () {
-      const d = JSON.stringify({
-        value: this.value,
-        children: this.children
-      })
-      const btn = this.$el.getElementsByClassName('download');
-      if (btn) {
-        const blob = new Blob([d], {type: 'application/json'});
-        const url = URL.createObjectURL(blob);
-        btn[0].href = url;
-        btn[0].download = this.value ? this.value : 'HalOutliner';
+      try {
+        this.$refs.hdnDLObject.value = JSON.stringify({
+          value: this.value,
+          children: this.children
+        });
+        this.$refs.hdnDLObject.dispatchEvent(new Event('change'));
+        this.$refs.hdnDLObject.value = '';
+      } catch (error) {
+        alert(error.toString());
       }
     },
     restore () {
