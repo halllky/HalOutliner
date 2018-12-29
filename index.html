@@ -8,7 +8,16 @@
     <script type="text/javascript" charset="utf8">
       function downloadOutOfVue() {
         const s = document.getElementById('hdnDLObject');
-        alert(s.value);
+        const blob = new Blob([s.value], { type: 'application\/json' });
+        if (!blob) {
+          window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function (fs) {
+            fs.root.getFile('test2.json', {create: true, exclusive: false}, function (fe) {
+              fe.createWriter(function (fw) {
+                fw.write(blob);
+              });
+            });
+          });
+        }
       }
       window.addEventListener('load', function () {
         const s = document.getElementById('hdnDLObject');
