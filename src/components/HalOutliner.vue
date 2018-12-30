@@ -296,4 +296,26 @@ $col_todo_back: #fff7c6;
   -o-transform: rotate(-45deg);
   -ms-transform: rotate(-45deg);
 }
+/* https://cssicon.space/#/ */
+.magnifier {
+  color: $col_main;
+  position: absolute;
+  margin-top: 1px;
+  margin-left: 2px;
+  width: 12px;
+  height: 12px;
+  border: solid 2px currentColor;
+  border-radius: 100%;
+  -webkit-transform: rotate(-45deg);
+          transform: rotate(-45deg);
+}
+.magnifier:before {
+  content: '';
+  position: absolute;
+  top: 12px;
+  left: 5px;
+  height: 8px;
+  width: 2px;
+  background-color: currentColor;
+}
 </style>
