@@ -55,8 +55,9 @@ export default {
       // find items that match search conditions
       const term = this.searchCondition.searchTerm;
       const onlyTodo = this.searchCondition.onlyTodo;
+      const reg = new RegExp(term.split(/( |　)+|\n+/g).join('|'), 'mi');
       function hasTerm (parent) {
-        if (parent.value.indexOf(term) >= 0) {
+        if (reg.test(parent.value)) {
           return true;
         }
         if (parent.children !== undefined) {
