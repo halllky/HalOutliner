@@ -1,10 +1,7 @@
 <template>
   <div ref="divBook" class="book">
+    <searcher @search="search"></searcher>
     <div style="text-align: right;">
-      <searcher @search="search"></searcher>
-      <label for="only_todo">
-        <input type="checkbox" id="only_todo" v-model="onlyTodo">only todo
-      </label>
       <a class="btn" @click="clear">clear</a>
       <a class="btn download" @click="download">export</a>
       <a class="btn" @click="restore">import</a>
@@ -46,26 +43,39 @@ export default {
       type: 0,
       value: '',
       children: [],
-      searchTerm: '',
-      onlyTodo: false
+      searchCondition: null
     }
   },
   computed: {
     filteredChildren () {
-      const term = this.searchTerm;
-      const onlyTodo = this.onlyTodo;
-      function isHit (parent) {
-        if ((term.length === 0 || parent.value.indexOf(term) >= 0) &&
-        (!onlyTodo || parent.todo === 1)) {
+      // if specify no condition
+      if (this.searchCondition === undefined || this.searchCondition === null) {
+        return this.children;
+      }
+      // find items that match search conditions
+      const term = this.searchCondition.searchTerm;
+      const onlyTodo = this.searchCondition.onlyTodo;
+      function hasTerm (parent) {
+        if (parent.value.indexOf(term) >= 0) {
           return true;
         }
         if (parent.children !== undefined) {
-          let i = parent.children.filter(c => isHit(c));
+          let i = parent.children.filter(c => hasTerm(c));
           if (i.length > 0) return true;
         }
         return false;
       }
-      return this.children.filter(c => isHit(c));
+      function isTodo (parent) {
+        if (parent.todo === 1) {
+          return true;
+        }
+        if (parent.children !== undefined) {
+          let i = parent.children.filter(c => isTodo(c));
+          if (i.length > 0) return true;
+        }
+        return false;
+      }
+      return this.children.filter(c => (!term || hasTerm(c)) && (!onlyTodo || isTodo(c)));
     }
   },
   methods: {
@@ -82,7 +92,7 @@ export default {
     },
     addRootMemo () {
       // clear search condition
-      this.search('');
+      this.search(null);
       // HACK: duplicate with MemoTree.vue
       this.children.push({
         addDt: this.formatDate(new Date(), 'YYYY-MM-DD hh:mm'),
@@ -125,8 +135,8 @@ export default {
         this.children = j.children;
       }
     },
-    search (term) {
-      this.searchTerm = term;
+    search (condition) {
+      this.$set(this, 'searchCondition', condition);
       window.setTimeout(this.delayResize, 10);
     },
     formatDate (date, format) {
@@ -235,17 +245,14 @@ $col_todo_back: #fff7c6;
     user-select: none;
   }
   &__txt{
+    @extend .txt;
     resize: none;
-    outline: none;
-    border: none;
     padding: 0;
     width: 100%;
     height: 1em;
     min-height: 1em;
     font-size: 14px;
     background: transparent;
-    color: $col_font;
-    font-family: "Yu Gothic", "游ゴシック", YuGothic, "游ゴシック体", "ヒラギノ角ゴ Pro W3", "メイリオ", sans-serif;
     font-weight: 500;
     line-height: 16px;
     &_strike{
@@ -311,6 +318,38 @@ $col_todo_back: #fff7c6;
 .v-enter, .v-leave-to{
   opacity: 0;
   transform: translateY(-100%);
+}
+.txt{
+  border: none;
+  outline: none;
+  color: $col_font;
+  font-family: "Yu Gothic", "游ゴシック", YuGothic, "游ゴシック体", "ヒラギノ角ゴ Pro W3", "メイリオ", sans-serif;
+}
+.input{
+  &__txt{
+    @extend .txt;
+    padding: 2px 10px;
+    border-radius: 20px;
+    box-shadow: 1px 1px 1px 1px rgba(19, 17, 26, 0.2) inset;
+  }
+}
+.search{
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  z-index: 1;
+  width: 20em;
+  padding: $siz_space;
+  background: $col_base;
+  border-radius: $siz_radius;
+}
+.search_btn{
+  @extend .btn;
+  display: block;
+}
+.search_condition{
+  display: block;
+  padding-bottom: $siz_space;
 }
 /* http://weboook.blog22.fc2.com/blog-entry-401.html */
 .plus{
