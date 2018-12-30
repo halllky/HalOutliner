@@ -55,6 +55,7 @@ export default {
       // find items that match search conditions
       const term = this.searchCondition.searchTerm;
       const onlyTodo = this.searchCondition.onlyTodo;
+      // eslint-disable-next-line no-irregular-whitespace
       const reg = new RegExp(term.split(/( |　)+|\n+/g).join('|'), 'mi');
       function hasTerm (parent) {
         if (reg.test(parent.value)) {
