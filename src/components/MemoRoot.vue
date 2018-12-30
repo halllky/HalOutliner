@@ -2,9 +2,6 @@
   <div ref="divBook" class="book">
     <div style="text-align: right;">
       <searcher @search="search"></searcher>
-      <label for="only_todo">
-        <input type="checkbox" id="only_todo" v-model="onlyTodo">only todo
-      </label>
       <a class="btn" @click="clear">clear</a>
       <a class="btn download" @click="download">export</a>
       <a class="btn" @click="restore">import</a>
@@ -46,14 +43,16 @@ export default {
       type: 0,
       value: '',
       children: [],
-      searchTerm: '',
-      onlyTodo: false
+      searchCondition: {
+        searchTerm: '',
+        onlyTodo: false
+      }
     }
   },
   computed: {
     filteredChildren () {
-      const term = this.searchTerm;
-      const onlyTodo = this.onlyTodo;
+      const term = this.searchCondition.searchTerm;
+      const onlyTodo = this.searchCondition.onlyTodo;
       function isHit (parent) {
         if ((term.length === 0 || parent.value.indexOf(term) >= 0) &&
         (!onlyTodo || parent.todo === 1)) {
@@ -125,8 +124,8 @@ export default {
         this.children = j.children;
       }
     },
-    search (term) {
-      this.searchTerm = term;
+    search (condition) {
+      this.$set(this, 'searchCondition', condition);
       window.setTimeout(this.delayResize, 10);
     },
     formatDate (date, format) {
