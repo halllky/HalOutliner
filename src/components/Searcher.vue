@@ -1,11 +1,14 @@
 <template>
-  <span>
-    <input type="text" class="search_condition" v-model="searchTerm" @blur="onBlur">
+  <div class="search">
+    <label for="text" class="search_condition">
+      contains:
+      <input type="text" class="input__txt" v-model="searchTerm" spellcheck="false" @blur="onBlur">
+    </label>
     <label for="only_todo" class="search_condition">
       <input type="checkbox" id="only_todo" v-model="onlyTodo">only todo
     </label>
-    <a class="btn" @click="search">search</a>
-  </span>
+    <a class="search_btn" @click="search">search</a>
+  </div>
 </template>
 <script>
 export default {
