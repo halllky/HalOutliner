@@ -2,7 +2,7 @@
   <div class="search">
     <label for="text" class="search_condition">
       contains:
-      <input type="text" class="input__txt" v-model="searchTerm" spellcheck="false" @blur="onBlur">
+      <input type="text" class="input__txt" v-model="searchTerm" spellcheck="false">
     </label>
     <label for="only_todo" class="search_condition">
       <input type="checkbox" id="only_todo" v-model="onlyTodo">only todo
@@ -20,9 +20,6 @@ export default {
     }
   },
   methods: {
-    onBlur () {
-      if (this.searchTerm.length === 0) this.$emit('search', '');
-    },
     search () {
       this.$emit('search', {
         searchTerm: this.searchTerm,
