@@ -1,4 +1,4 @@
 <template>
-  <div>
+  <div class="footer-menu">
   </div>
 </template>

@@ -172,6 +172,15 @@ $col_todo_back: #fff7c6;
     box-shadow: 1px 1px 1px 1px rgba(19, 17, 26, 0.2) inset;
   }
 }
+.footer-menu{
+  width: 100%;
+  height: 3em;
+  display: flex;
+  justify-content: space-around;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+}
 .search{
   position: fixed;
   bottom: 0;
