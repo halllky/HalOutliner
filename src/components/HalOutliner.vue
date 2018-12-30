@@ -128,13 +128,14 @@ $col_todo_back: #fff7c6;
   }
 }
 .btn{
-  display: inline-block;
+  display: inline-flex;
   min-width: 20px;
   min-height: 20px;
   background: $col_accent;
   color: $col_main;
   border-radius: $siz_radius;
-  text-align: center;
+  justify-content: center;
+  align-items: center;
   user-select: none;
   cursor: default;
   &:active{
@@ -152,7 +153,7 @@ $col_todo_back: #fff7c6;
   }
 }
 .icon{
-  display: inline-block;
+  display: inline-flex;
   width: 20px;
   height: 20px;
   border-radius: 50%;
@@ -160,7 +161,8 @@ $col_todo_back: #fff7c6;
   cursor: default;
   background: $col_accent;
   color: $col_main;
-  text-align: center;
+  justify-content: center;
+  align-items: center;
   &__todo{
     @extend .icon;
     background: $col_todo;
@@ -210,8 +212,6 @@ $col_todo_back: #fff7c6;
   background: $col_main;
   &__item{
     @extend .btn;
-    display: block;
-    list-style-type: none;
     width: -webkit-fill-available;
     margin: 0 2px;
   }
@@ -276,7 +276,6 @@ $col_todo_back: #fff7c6;
   width: 4px;
   height: 16px;
   background: $col_main;
-  transform: translateY(3px);
 }
 .plus:before{
   display: block;
