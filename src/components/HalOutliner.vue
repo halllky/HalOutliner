@@ -226,11 +226,12 @@ $col_todo_back: #fff7c6;
   background: $col_base;
   border-radius: $siz_radius;
   &__condition{
-    display: block;
+    display: flex;
     padding-bottom: $siz_space;
   }
   &__txt{
     @extend .input__txt;
+    width: -webkit-fill-available;
   }
   &__btn{
     @extend .btn;
