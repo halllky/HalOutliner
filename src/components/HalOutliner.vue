@@ -3,8 +3,9 @@
     <memo-root
       ref="memoRootItem"
       :search-condition="searchCondition"/>
-    <footer-menu></footer-menu>
-    <searcher @search="search"></searcher>
+    <footer-menu
+      @search="showSearcher = !showSearcher"/>
+    <searcher v-if="showSearcher" @search="search"/>
   </div>
 </template>
 <script>
@@ -15,6 +16,7 @@ export default {
   components: { MemoRoot, FooterMenu, Searcher },
   data () {
     return {
+      showSearcher: false,
       searchCondition: null
     }
   },
@@ -188,6 +190,7 @@ $col_todo_back: #fff7c6;
   }
 }
 .footer-menu{
+  z-index: 1;
   width: 100%;
   height: 3em;
   display: flex;
@@ -209,7 +212,6 @@ $col_todo_back: #fff7c6;
   position: fixed;
   bottom: 0;
   left: 0;
-  z-index: 1;
   width: 20em;
   padding: $siz_space;
   background: $col_base;
