@@ -1,14 +1,29 @@
 <template>
   <div>
-    <memo-root></memo-root>
+    <memo-root
+      ref="memoRootItem"
+      :search-condition="searchCondition"/>
     <footer-menu></footer-menu>
+    <searcher @search="search"></searcher>
   </div>
 </template>
 <script>
 import MemoRoot from './MemoRoot.vue';
-import FooterMenu from './FooterMenu.vue'
+import FooterMenu from './FooterMenu.vue';
+import Searcher from './Searcher';
 export default {
-  components: { MemoRoot, FooterMenu }
+  components: { MemoRoot, FooterMenu, Searcher },
+  data () {
+    return {
+      searchCondition: null
+    }
+  },
+  methods: {
+    search (condition) {
+      this.$set(this, 'searchCondition', condition);
+      window.setTimeout(this.$refs.memoRootItem.delayResize, 10);
+    }
+  }
 }
 </script>
 <style lang="scss">

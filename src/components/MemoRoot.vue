@@ -1,6 +1,5 @@
 <template>
   <div ref="divBook" class="book">
-    <searcher @search="search"></searcher>
     <div style="text-align: right;">
       <a class="btn" @click="clear">clear</a>
       <a class="btn download" @click="download">export</a>
@@ -31,19 +30,20 @@
 </template>
 <script>
 import MemoTree from './MemoTree';
-import Searcher from './Searcher';
 
 export default {
   name: 'MemoRoot',
-  components: { MemoTree, Searcher },
+  components: { MemoTree },
+  props: {
+    searchCondition: Object
+  },
   data () {
     return {
       addDt: this.formatDate(new Date(), 'YYYY-MM-DD hh:mm'),
       expanded: true,
       type: 0,
       value: '',
-      children: [],
-      searchCondition: null
+      children: []
     }
   },
   computed: {
@@ -91,8 +91,6 @@ export default {
       window.setTimeout(this.delayResize, 10);
     },
     addRootMemo () {
-      // clear search condition
-      this.search(null);
       // HACK: duplicate with MemoTree.vue
       this.children.push({
         addDt: this.formatDate(new Date(), 'YYYY-MM-DD hh:mm'),
@@ -134,10 +132,6 @@ export default {
         this.value = j.value;
         this.children = j.children;
       }
-    },
-    search (condition) {
-      this.$set(this, 'searchCondition', condition);
-      window.setTimeout(this.delayResize, 10);
     },
     formatDate (date, format) {
       // HACK: duplicate with MemoTree.vue
