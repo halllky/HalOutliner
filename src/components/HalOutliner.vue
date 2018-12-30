@@ -28,6 +28,7 @@ export default {
   },
   methods: {
     search (condition) {
+      this.showSearcher = false;
       this.$set(this, 'searchCondition', condition);
       window.setTimeout(this.$refs.memoRootItem.delayResize, 10);
     }
