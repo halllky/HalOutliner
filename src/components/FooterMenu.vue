@@ -1,4 +1,5 @@
 <template>
-  <div class="footer-menu">
-  </div>
+  <ul class="footer-menu">
+    <li class="footer-menu__item"></li>
+  </ul>
 </template>

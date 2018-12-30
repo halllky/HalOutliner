@@ -195,6 +195,15 @@ $col_todo_back: #fff7c6;
   position: fixed;
   left: 0;
   bottom: 0;
+  margin: 0 0 2px 0;
+  padding: 0;
+  &__item{
+    @extend .btn;
+    display: block;
+    list-style-type: none;
+    width: -webkit-fill-available;
+    margin: 0 2px;
+  }
 }
 .search{
   position: fixed;
