@@ -179,14 +179,17 @@ $col_todo_back: #fff7c6;
   padding: $siz_space;
   background: $col_base;
   border-radius: $siz_radius;
-}
-.search_btn{
-  @extend .btn;
-  display: block;
-}
-.search_condition{
-  display: block;
-  padding-bottom: $siz_space;
+  &__condition{
+    display: block;
+    padding-bottom: $siz_space;
+  }
+  &__txt{
+    @extend .input__txt;
+  }
+  &__btn{
+    @extend .btn;
+    display: block;
+  }
 }
 /* http://weboook.blog22.fc2.com/blog-entry-401.html */
 .plus{

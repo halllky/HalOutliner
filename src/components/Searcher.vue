@@ -1,13 +1,13 @@
 <template>
   <div class="search">
-    <label for="text" class="search_condition">
+    <label for="text" class="search__condition">
       contains:
-      <input type="text" class="input__txt" v-model="searchTerm" spellcheck="false">
+      <input type="text" class="search__txt" v-model="searchTerm" spellcheck="false">
     </label>
-    <label for="only_todo" class="search_condition">
+    <label for="only_todo" class="search__condition">
       <input type="checkbox" id="only_todo" v-model="onlyTodo">only todo
     </label>
-    <a class="search_btn" @click="search">search</a>
+    <a class="search__btn" @click="search">search</a>
   </div>
 </template>
 <script>
