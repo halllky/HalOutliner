@@ -43,18 +43,20 @@ export default {
       type: 0,
       value: '',
       children: [],
-      searchCondition: {
-        searchTerm: '',
-        onlyTodo: false
-      }
+      searchCondition: null
     }
   },
   computed: {
     filteredChildren () {
+      // if specify no condition
+      if (this.searchCondition === undefined || this.searchCondition === null) {
+        return this.children;
+      }
+      // find items that match search conditions
       const term = this.searchCondition.searchTerm;
       const onlyTodo = this.searchCondition.onlyTodo;
       function isHit (parent) {
-        if ((term.length === 0 || parent.value.indexOf(term) >= 0) &&
+        if ((term.length === 0 || parent.value.indexOf(term) >= 0) ||
         (!onlyTodo || parent.todo === 1)) {
           return true;
         }
@@ -81,7 +83,7 @@ export default {
     },
     addRootMemo () {
       // clear search condition
-      this.search('');
+      this.search();
       // HACK: duplicate with MemoTree.vue
       this.children.push({
         addDt: this.formatDate(new Date(), 'YYYY-MM-DD hh:mm'),
