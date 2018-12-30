@@ -4,9 +4,13 @@
       ref="memoRootItem"
       :search-condition="searchCondition"/>
     <footer-menu
+      style="z-index: 30;"
       @search="showSearcher = !showSearcher"/>
     <transition name="transition-up">
-      <searcher v-if="showSearcher" @search="search"/>
+      <searcher v-if="showSearcher" @search="search" style="z-index: 20;"/>
+    </transition>
+    <transition name="transition-fade">
+      <div v-if="showSearcher" class="smoke" style="z-index: 10;"></div>
     </transition>
   </div>
 </template>
@@ -193,7 +197,6 @@ $col_todo_back: #fff7c6;
   }
 }
 .footer-menu{
-  z-index: 1;
   width: 100%;
   height: $siz_footer_height;
   display: flex;
@@ -231,12 +234,32 @@ $col_todo_back: #fff7c6;
     display: block;
   }
 }
+.smoke{
+  display: block;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.3);
+}
 .transition-up{
   &-enter, &-leave-to{
     transform: translateY(100%);
   }
   &-enter-to, &-leave{
     transform: translateY(0);
+  }
+  &-enter-active, &-leave-active{
+    transition: all .2s ease;
+  }
+}
+.transition-fade{
+  &-enter, &-leave-to{
+    opacity: 0;
+  }
+  &-enter-to, &-leave{
+    opacity: 1;
   }
   &-enter-active, &-leave-active{
     transition: all .2s ease;
