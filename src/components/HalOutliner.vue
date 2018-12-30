@@ -1,12 +1,14 @@
 <template>
   <div>
     <memo-root></memo-root>
+    <footer-menu></footer-menu>
   </div>
 </template>
 <script>
 import MemoRoot from './MemoRoot.vue';
+import FooterMenu from './FooterMenu.vue'
 export default {
-  components: { MemoRoot }
+  components: { MemoRoot, FooterMenu }
 }
 </script>
 <style lang="scss">
