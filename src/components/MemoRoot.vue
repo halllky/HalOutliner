@@ -55,18 +55,27 @@ export default {
       // find items that match search conditions
       const term = this.searchCondition.searchTerm;
       const onlyTodo = this.searchCondition.onlyTodo;
-      function isHit (parent) {
-        if ((term.length === 0 || parent.value.indexOf(term) >= 0) ||
-        (!onlyTodo || parent.todo === 1)) {
+      function hasTerm (parent) {
+        if (parent.value.indexOf(term) >= 0) {
           return true;
         }
         if (parent.children !== undefined) {
-          let i = parent.children.filter(c => isHit(c));
+          let i = parent.children.filter(c => hasTerm(c));
           if (i.length > 0) return true;
         }
         return false;
       }
-      return this.children.filter(c => isHit(c));
+      function isTodo (parent) {
+        if (parent.todo === 1) {
+          return true;
+        }
+        if (parent.children !== undefined) {
+          let i = parent.children.filter(c => isTodo(c));
+          if (i.length > 0) return true;
+        }
+        return false;
+      }
+      return this.children.filter(c => (!term || hasTerm(c)) && (!onlyTodo || isTodo(c)));
     }
   },
   methods: {
@@ -83,7 +92,7 @@ export default {
     },
     addRootMemo () {
       // clear search condition
-      this.search();
+      this.search(null);
       // HACK: duplicate with MemoTree.vue
       this.children.push({
         addDt: this.formatDate(new Date(), 'YYYY-MM-DD hh:mm'),
