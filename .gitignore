@@ -17,4 +17,5 @@ yarn-error.log*
 /www/
 /platforms/android/.gradle/
 /platforms/android/app/build/
+/platforms/android/app/src/
 /platforms/android/CordovaLib/build/
