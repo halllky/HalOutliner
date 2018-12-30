@@ -2,7 +2,12 @@
   <div class="search">
     <label for="text" class="search__condition">
       contains:
-      <input type="text" class="search__txt" v-model="searchTerm" spellcheck="false">
+      <input
+        type="text"
+        class="search__txt"
+        v-model="searchTerm"
+        spellcheck="false"
+        onfocus="select();">
     </label>
     <label for="only_todo" class="search__condition">
       <input type="checkbox" id="only_todo" v-model="onlyTodo">only todo
