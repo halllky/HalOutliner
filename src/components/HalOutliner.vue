@@ -204,8 +204,10 @@ $col_todo_back: #fff7c6;
   position: fixed;
   left: 0;
   bottom: 0;
-  margin: 0 0 2px 0;
-  padding: 0;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 2px 0;
+  background: $col_main;
   &__item{
     @extend .btn;
     display: block;
