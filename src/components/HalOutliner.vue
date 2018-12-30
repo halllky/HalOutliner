@@ -234,7 +234,7 @@ $col_todo_back: #fff7c6;
   }
   &__btn{
     @extend .btn;
-    display: block;
+    width: -webkit-fill-available;
   }
 }
 .smoke{
