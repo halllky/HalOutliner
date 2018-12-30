@@ -5,7 +5,9 @@
       :search-condition="searchCondition"/>
     <footer-menu
       @search="showSearcher = !showSearcher"/>
-    <searcher v-if="showSearcher" @search="search"/>
+    <transition name="transition-up">
+      <searcher v-if="showSearcher" @search="search"/>
+    </transition>
   </div>
 </template>
 <script>
@@ -31,6 +33,7 @@ export default {
 <style lang="scss">
 $siz_space: 6px;
 $siz_radius: 4px;
+$siz_footer_height: 3em;
 $col_base: rgb(247, 236, 223);
 $col_main: rgb(253, 252, 249);
 $col_accent: rgb(196, 176, 150);
@@ -192,7 +195,7 @@ $col_todo_back: #fff7c6;
 .footer-menu{
   z-index: 1;
   width: 100%;
-  height: 3em;
+  height: $siz_footer_height;
   display: flex;
   justify-content: space-around;
   position: fixed;
@@ -210,7 +213,7 @@ $col_todo_back: #fff7c6;
 }
 .search{
   position: fixed;
-  bottom: 0;
+  bottom: $siz_footer_height;
   left: 0;
   width: 20em;
   padding: $siz_space;
@@ -226,6 +229,17 @@ $col_todo_back: #fff7c6;
   &__btn{
     @extend .btn;
     display: block;
+  }
+}
+.transition-up{
+  &-enter, &-leave-to{
+    transform: translateY(100%);
+  }
+  &-enter-to, &-leave{
+    transform: translateY(0);
+  }
+  &-enter-active, &-leave-active{
+    transition: all .2s ease;
   }
 }
 /* http://weboook.blog22.fc2.com/blog-entry-401.html */
