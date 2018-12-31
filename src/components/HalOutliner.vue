@@ -54,19 +54,16 @@ export default {
   display: inline-flex;
   width: 20px;
   height: 20px;
-  border-radius: 50%;
   user-select: none;
   cursor: default;
-  background: $col_accent;
   color: $col_main;
   justify-content: center;
   align-items: center;
   &__todo{
     @extend .icon;
+    border-radius: 50%;
     background: $col_todo;
     position: absolute;
-    top: -0.2em;
-    left: -1.2em;
   }
 }
 .smoke{
