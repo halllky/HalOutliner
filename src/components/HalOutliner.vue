@@ -138,4 +138,36 @@ export default {
   width: 2px;
   background-color: currentColor;
 }
+.download {
+  color: $col_main;
+  position: absolute;
+  margin-left: 0px;
+  margin-top: 6px;
+  width: 13px;
+  height: 4px;
+  border-radius: 2px;
+  border: solid 2px currentColor;
+  border-top: none;
+}
+.download:before {
+  content: '';
+  position: absolute;
+  left: 6px;
+  top: -9px;
+  width: 2px;
+  height: 10px;
+  background-color: currentColor;
+}
+.download:after {
+  content: '';
+  position: absolute;
+  left: 4px;
+  top: -4px;
+  width: 4px;
+  height: 4px;
+  border-top: solid 2px currentColor;
+  border-right: solid 2px currentColor;
+  -webkit-transform: rotate(135deg);
+          transform: rotate(135deg);
+}
 </style>

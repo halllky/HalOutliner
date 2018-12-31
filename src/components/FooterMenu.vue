@@ -3,6 +3,9 @@
     <li class="footer-menu__item" @click="switchShowSearcher">
       <span class="magnifier"></span>
     </li>
+    <li class="footer-menu__item">
+      <span class="download"></span>
+    </li>
   </ul>
 </template>
 <script>
