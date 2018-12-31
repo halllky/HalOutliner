@@ -3,6 +3,9 @@
     <li class="footer-menu__item" @click="switchShowSearcher">
       <span class="magnifier"></span>
     </li>
+    <li class="footer-menu__item" @click="download">
+      <span class="download"></span>
+    </li>
   </ul>
 </template>
 <script>
@@ -10,6 +13,9 @@ export default {
   methods: {
     switchShowSearcher () {
       this.$emit('search');
+    },
+    download () {
+      this.$emit('download');
     }
   }
 }

@@ -5,7 +5,9 @@
       :search-condition="searchCondition"/>
     <footer-menu
       style="z-index: 30;"
-      @search="showSearcher = !showSearcher"/>
+      @search="showSearcher = !showSearcher"
+      @download="download"/>
+    <a ref="downloadAnchor"></a>
     <transition name="transition-up">
       <searcher v-show="showSearcher" @search="search" style="z-index: 20;"/>
     </transition>
@@ -31,6 +33,17 @@ export default {
       this.showSearcher = false;
       this.$set(this, 'searchCondition', condition);
       window.setTimeout(this.$refs.memoRootItem.delayResize, 10);
+    },
+    download () {
+      const obj = {
+        value: this.$refs.memoRootItem.value,
+        children: this.$refs.memoRootItem.children
+      };
+      const blob = new Blob([JSON.stringify(obj)], {type: 'application/json'});
+      const btn = this.$refs.downloadAnchor;
+      btn.href = URL.createObjectURL(blob);
+      btn.download = this.value ? this.value : 'HalOutliner';
+      btn.click();
     }
   }
 }
@@ -137,5 +150,37 @@ export default {
   height: 8px;
   width: 2px;
   background-color: currentColor;
+}
+.download {
+  color: $col_main;
+  position: absolute;
+  margin-left: 0px;
+  margin-top: 6px;
+  width: 13px;
+  height: 4px;
+  border-radius: 2px;
+  border: solid 2px currentColor;
+  border-top: none;
+}
+.download:before {
+  content: '';
+  position: absolute;
+  left: 6px;
+  top: -9px;
+  width: 2px;
+  height: 10px;
+  background-color: currentColor;
+}
+.download:after {
+  content: '';
+  position: absolute;
+  left: 4px;
+  top: -4px;
+  width: 4px;
+  height: 4px;
+  border-top: solid 2px currentColor;
+  border-right: solid 2px currentColor;
+  -webkit-transform: rotate(135deg);
+          transform: rotate(135deg);
 }
 </style>

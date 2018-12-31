@@ -2,7 +2,6 @@
   <div ref="divBook" class="book">
     <div style="text-align: right;">
       <a class="btn" @click="clear">clear</a>
-      <a class="btn" @click="download" ref="downloadItem">export</a>
       <a class="btn" @click="restore">import</a>
     </div>
     <input
@@ -112,16 +111,6 @@ export default {
         this.value = '';
         this.children = [];
       }
-    },
-    download () {
-      const d = JSON.stringify({
-        value: this.value,
-        children: this.children
-      })
-      const blob = new Blob([d], {type: 'application/json'});
-      const btn = this.$refs.downloadItem;
-      btn.href = URL.createObjectURL(blob);
-      btn.download = this.value ? this.value : 'HalOutliner';
     },
     restore () {
       const d = window.prompt('paset JSON here', '');
