@@ -36,18 +36,7 @@ export default {
 }
 </script>
 <style lang="scss">
-$siz_space: 6px;
-$siz_radius: 4px;
-$siz_footer_height: 3em;
-$col_base: rgb(247, 236, 223);
-$col_main: rgb(253, 252, 249);
-$col_accent: rgb(196, 176, 150);
-$col_font: rgb(13, 80, 134);
-$col_font_strike: rgb(209, 209, 209);
-$col_subfont: gray;
-$col_dangerous: rgb(233, 120, 120);
-$col_todo: rgb(236, 178, 17);
-$col_todo_back: #fff7c6;
+@import '../assets/util.scss';
 .book{
   max-width: 50em;
   background: $col_base;
