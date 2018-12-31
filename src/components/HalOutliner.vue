@@ -37,66 +37,6 @@ export default {
 </script>
 <style lang="scss">
 @import '../assets/util.scss';
-.memo{
-  position: relative;
-  background: $col_main;
-  border-radius: $siz_radius;
-  box-sizing: border-box;
-  padding: $siz_space;
-  &__header{
-    display: flex;
-    justify-content: flex-end;
-    &_outbody{
-      @extend .memo__header;
-      position: relative;
-    }
-    &_inbody{
-      @extend .memo__header;
-      position: absolute;
-      right: $siz_space;
-    }
-  }
-  &__header :not(:first-child){
-    margin-left: $siz_space;
-  }
-  &__body{
-    line-height: 0;
-  }
-  &__children{
-    margin: auto;
-    padding-left: 1.5em;
-  }
-  &__child{
-    display: block;
-    margin-top: $siz_space;
-  }
-  &__timestamp{
-    right: 0;
-    color: $col_subfont;
-    font-size: 10px;
-    cursor: default;
-    user-select: none;
-  }
-  &__txt{
-    @extend .txt;
-    resize: none;
-    padding: 0;
-    width: 100%;
-    height: 1em;
-    min-height: 1em;
-    font-size: 14px;
-    background: transparent;
-    font-weight: 500;
-    line-height: 16px;
-    &_strike{
-      color: $col_font_strike;
-      text-decoration-line: line-through;
-    }
-  }
-  &__img{
-    max-width: 90%;
-  }
-}
 .icon{
   display: inline-flex;
   width: 20px;
@@ -115,19 +55,6 @@ export default {
     top: -0.2em;
     left: -1.2em;
   }
-}
-.todo{
-  background: $col_todo_back;
-}
-.done{
-  color: $col_font_strike;
-}
-.v-enter-active, .v-leave-active{
-  transition: all .3s ease;
-}
-.v-enter, .v-leave-to{
-  opacity: 0;
-  transform: translateY(-100%);
 }
 .smoke{
   display: block;
