@@ -81,27 +81,6 @@ export default {
     transition: all .2s ease;
   }
 }
-/* http://weboook.blog22.fc2.com/blog-entry-401.html */
-.plus{
-  display: inline-block;
-  position: relative;
-  margin: auto;
-  padding: 0;
-  width: 4px;
-  height: 16px;
-  background: $col_main;
-}
-.plus:before{
-  display: block;
-  content: "";
-  position: absolute;
-  top: 50%;
-  left: -6px;
-  width: 16px;
-  height: 4px;
-  margin-top: -2px;
-  background: $col_main;
-}
 .cross{
   @extend .plus;
   transform: rotate(-45deg) translateY(3px);
