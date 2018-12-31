@@ -5,7 +5,9 @@
       :search-condition="searchCondition"/>
     <footer-menu
       style="z-index: 30;"
-      @search="showSearcher = !showSearcher"/>
+      @search="showSearcher = !showSearcher"
+      @download="download"/>
+    <a ref="downloadAnchor"></a>
     <transition name="transition-up">
       <searcher v-show="showSearcher" @search="search" style="z-index: 20;"/>
     </transition>
@@ -31,6 +33,17 @@ export default {
       this.showSearcher = false;
       this.$set(this, 'searchCondition', condition);
       window.setTimeout(this.$refs.memoRootItem.delayResize, 10);
+    },
+    download () {
+      const obj = {
+        value: this.$refs.memoRootItem.value,
+        children: this.$refs.memoRootItem.children
+      };
+      const blob = new Blob([JSON.stringify(obj)], {type: 'application/json'});
+      const btn = this.$refs.downloadAnchor;
+      btn.href = URL.createObjectURL(blob);
+      btn.download = this.value ? this.value : 'HalOutliner';
+      btn.click();
     }
   }
 }
