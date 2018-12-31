@@ -9,7 +9,9 @@
       @download="download"
       @upload-start="openUploader"/>
     <a ref="downloadAnchor"></a>
-    <uploader v-if="showUploader"/>
+    <uploader
+      v-if="showUploader"
+      @cancel="closeUploader('')"/>
     <transition name="transition-up">
       <searcher v-show="showSearcher" @search="search" style="z-index: 20;"/>
     </transition>
@@ -51,6 +53,10 @@ export default {
     },
     openUploader () {
       this.showUploader = true;
+    },
+    closeUploader (returnValue) {
+      this.showUploader = false;
+      if (!returnValue) return;
     }
   }
 }
