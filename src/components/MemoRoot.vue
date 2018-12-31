@@ -2,7 +2,6 @@
   <div ref="divBook" class="book">
     <div style="text-align: right;">
       <a class="btn" @click="clear">clear</a>
-      <a class="btn" @click="restore">import</a>
     </div>
     <input
       class="book__title"
@@ -108,14 +107,6 @@ export default {
       if (confirm('clear?')) {
         this.value = '';
         this.children = [];
-      }
-    },
-    restore () {
-      const d = window.prompt('paset JSON here', '');
-      const j = JSON.parse(d);
-      if (j) {
-        this.value = j.value;
-        this.children = j.children;
       }
     },
     formatDate (date, format) {
