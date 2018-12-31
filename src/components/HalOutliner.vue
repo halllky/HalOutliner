@@ -81,12 +81,4 @@ export default {
     transition: all .2s ease;
   }
 }
-.cross{
-  @extend .plus;
-  transform: rotate(-45deg) translateY(3px);
-  -moz-transform: rotate(-45deg);
-  -webkit-transform: rotate(-45deg);
-  -o-transform: rotate(-45deg);
-  -ms-transform: rotate(-45deg);
-}
 </style>

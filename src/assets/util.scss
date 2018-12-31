@@ -40,6 +40,26 @@ $col_todo_back: #fff7c6;
     background: darken($col_accent, 10%);
     transform: translateY(1px);
   }
+  &-delete{
+    @extend .btn;
+    background: $col_dangerous;
+    &:active{
+      background: darken($col_dangerous, 10%);
+    }
+    &::before{
+      content: '';
+      display: block;
+      position: absolute;
+      background: $col_main;
+      width: 2px;
+      height: 12px;
+      transform: rotate(-45deg);
+    }
+    &::after{
+      @extend .btn-delete::before;
+      transform: rotate(45deg);
+    }
+  }
 }
 .icon{
   display: inline-flex;
