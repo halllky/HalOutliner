@@ -34,3 +34,27 @@ export default {
   }
 }
 </script>
+<style lang="scss">
+@import '../assets/util.scss';
+.search{
+  position: fixed;
+  bottom: $siz_footer_height;
+  left: 0;
+  width: 20em;
+  padding: $siz_space;
+  background: $col_base;
+  border-radius: $siz_radius;
+  &__condition{
+    display: flex;
+    padding-bottom: $siz_space;
+  }
+  &__txt{
+    @extend .input__txt;
+    width: -webkit-fill-available;
+  }
+  &__btn{
+    @extend .btn;
+    width: -webkit-fill-available;
+  }
+}
+</style>

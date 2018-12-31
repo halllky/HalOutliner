@@ -2,28 +2,27 @@
   <div ref="divBook" class="book">
     <div style="text-align: right;">
       <a class="btn" @click="clear">clear</a>
-      <a class="btn download" @click="download">export</a>
+      <a class="btn" @click="download" ref="downloadItem">export</a>
       <a class="btn" @click="restore">import</a>
     </div>
     <input
-      class="title"
+      class="book__title"
       type="text"
       placeholder="title"
       spellcheck="false"
       v-model="value"
       @input="save">
-    <ul class="memo__children" style="padding-left: 0;">
+    <ul class="book__items">
       <memo-tree
         v-for="(c, index) in filteredChildren"
         :key="index"
         :item="c"
         ref="childItem"
-        class="memo__child"
         @remove="removeChild($event); save();"
         @save="save">
       </memo-tree>
     </ul>
-    <a class="btn memo__child" @click="addRootMemo">
+    <a class="book__btn-add" @click="addRootMemo">
       <span class="plus"></span>
     </a>
   </div>
@@ -119,13 +118,10 @@ export default {
         value: this.value,
         children: this.children
       })
-      const btn = this.$el.getElementsByClassName('download');
-      if (btn) {
-        const blob = new Blob([d], {type: 'application/json'});
-        const url = URL.createObjectURL(blob);
-        btn[0].href = url;
-        btn[0].download = this.value ? this.value : 'HalOutliner';
-      }
+      const blob = new Blob([d], {type: 'application/json'});
+      const btn = this.$refs.downloadItem;
+      btn.href = URL.createObjectURL(blob);
+      btn.download = this.value ? this.value : 'HalOutliner';
     },
     restore () {
       const d = window.prompt('paset JSON here', '');
@@ -168,3 +164,32 @@ export default {
   }
 }
 </script>
+<style lang="scss">
+@import '../assets/util.scss';
+.book{
+  max-width: 50em;
+  background: $col_base;
+  border-radius: $siz_radius;
+  box-sizing: border-box;
+  padding: $siz_space;
+  margin-bottom: 50vh;
+  margin-left: auto;
+  margin-right: auto;
+  &__title{
+    @extend .txt;
+    font-size: 18px;
+    min-height: 1.4em;
+    border-bottom: 1px solid $col_accent;
+    background: transparent;
+  }
+  &__items{
+    margin: auto;
+    padding: 0;
+  }
+  &__btn-add{
+    @extend .btn;
+    width: 100%;
+    margin-top: $siz_space;
+  }
+}
+</style>
