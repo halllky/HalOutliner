@@ -154,6 +154,7 @@ export default {
   &__title{
     @extend .txt;
     font-size: 18px;
+    width: 90%;
     min-height: 1.4em;
     border-bottom: 1px solid $col_accent;
     background: transparent;
