@@ -1,7 +1,7 @@
 <template>
   <li class="memo__child">
     <div class="memo" :class="{ todo: item.todo === 1 }">
-      <span class="icon__todo" v-if="showTodoIcon">！</span>
+      <span class="memo__todo-icon" v-if="showTodoIcon"></span>
       <div ref="divHeader">
         <span class="memo__timestamp">{{ item.addDt }}</span>
         <a class="btn" @click="addChild(0, '')"><span class="plus"></span></a>
@@ -219,6 +219,18 @@ export default {
     cursor: default;
     user-select: none;
   }
+  &__todo-icon{
+    @extend .icon;
+    position: absolute;
+    top: -0.2em;
+    left: -1.2em;
+    border-radius: 50%;
+    background: $col_todo;
+    &::before{
+      content: '！';
+      color: $col_main;
+    }
+  }
   &__txt{
     @extend .txt;
     resize: none;
@@ -253,25 +265,6 @@ export default {
 }
 .done{
   color: $col_font_strike;
-}
-.icon{
-  display: inline-flex;
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  user-select: none;
-  cursor: default;
-  background: $col_accent;
-  color: $col_main;
-  justify-content: center;
-  align-items: center;
-  &__todo{
-    @extend .icon;
-    background: $col_todo;
-    position: absolute;
-    top: -0.2em;
-    left: -1.2em;
-  }
 }
 .transition-dropdown{
   &-enter-active, &-leave-active{

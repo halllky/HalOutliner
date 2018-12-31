@@ -41,3 +41,12 @@ $col_todo_back: #fff7c6;
     transform: translateY(1px);
   }
 }
+.icon{
+  display: inline-flex;
+  width: 20px;
+  height: 20px;
+  user-select: none;
+  cursor: default;
+  justify-content: center;
+  align-items: center;
+}

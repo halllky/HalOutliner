@@ -50,22 +50,6 @@ export default {
 </script>
 <style lang="scss">
 @import '../assets/util.scss';
-.icon{
-  display: inline-flex;
-  width: 20px;
-  height: 20px;
-  user-select: none;
-  cursor: default;
-  color: $col_main;
-  justify-content: center;
-  align-items: center;
-  &__todo{
-    @extend .icon;
-    border-radius: 50%;
-    background: $col_todo;
-    position: absolute;
-  }
-}
 .smoke{
   display: block;
   position: fixed;
