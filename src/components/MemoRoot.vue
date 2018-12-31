@@ -1,8 +1,6 @@
 <template>
   <div ref="divBook" class="book">
-    <div style="text-align: right;">
-      <a class="btn" @click="clear">clear</a>
-    </div>
+    <a class="book__btn-delete" @click="clear"></a>
     <input
       class="book__title"
       type="text"
@@ -163,6 +161,10 @@ export default {
   &__items{
     margin: auto;
     padding: 0;
+  }
+  &__btn-delete{
+    @extend .btn-delete;
+    float: right;
   }
   &__btn-add{
     @extend .btn-add;
