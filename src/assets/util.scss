@@ -40,12 +40,8 @@ $col_todo_back: #fff7c6;
     background: darken($col_accent, 10%);
     transform: translateY(1px);
   }
-  &-delete{
+  &-add{
     @extend .btn;
-    background: $col_dangerous;
-    &:active{
-      background: darken($col_dangerous, 10%);
-    }
     &::before{
       content: '';
       display: block;
@@ -53,10 +49,24 @@ $col_todo_back: #fff7c6;
       background: $col_main;
       width: 2px;
       height: 12px;
+    }
+    &::after{
+      @extend .btn-add::before;
+      transform: rotate(90deg);
+    }
+  }
+  &-delete{
+    @extend .btn;
+    background: $col_dangerous;
+    &:active{
+      background: darken($col_dangerous, 10%);
+    }
+    &::before{
+      @extend .btn-add::before;
       transform: rotate(-45deg);
     }
     &::after{
-      @extend .btn-delete::before;
+      @extend .btn-add::before;
       transform: rotate(45deg);
     }
   }
@@ -77,26 +87,5 @@ $col_todo_back: #fff7c6;
       content: '！';
       color: $col_main;
     }
-  }
-}
-/* http://weboook.blog22.fc2.com/blog-entry-401.html */
-.plus{
-  display: inline-block;
-  position: relative;
-  margin: auto;
-  padding: 0;
-  width: 4px;
-  height: 16px;
-  background: $col_main;
-  &:before{
-    display: block;
-    content: "";
-    position: absolute;
-    top: 50%;
-    left: -6px;
-    width: 16px;
-    height: 4px;
-    margin-top: -2px;
-    background: $col_main;
   }
 }

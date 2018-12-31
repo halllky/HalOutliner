@@ -4,7 +4,7 @@
       <span class="memo__todo-icon" v-if="showTodoIcon"></span>
       <div ref="divHeader">
         <span class="memo__timestamp">{{ item.addDt }}</span>
-        <a class="btn" @click="addChild(0, '')"><span class="plus"></span></a>
+        <a class="btn-add" @click="addChild(0, '')"></a>
         <a class="btn" @click="switchTodo">{{ todoButtonText }}</a>
         <a class="btn" @click="switchExpand" style="min-width: 20px;">
           {{ item.expanded ? '-' : item.children ? item.children.length : '0' }}
