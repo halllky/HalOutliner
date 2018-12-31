@@ -3,9 +3,7 @@
     <img
       :src="value"
       :class="cssclass">
-    <a class="memo__delete-image" @click="deleteThis">
-      <span class="cross"></span>
-    </a>
+    <a class="btn-delete" @click="deleteThis"></a>
   </div>
 </template>
 <script>

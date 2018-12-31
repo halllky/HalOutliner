@@ -21,9 +21,7 @@
         @save="save">
       </memo-tree>
     </ul>
-    <a class="book__btn-add" @click="addRootMemo">
-      <span class="plus"></span>
-    </a>
+    <a class="book__btn-add" @click="addRootMemo"></a>
   </div>
 </template>
 <script>
@@ -176,7 +174,7 @@ export default {
     padding: 0;
   }
   &__btn-add{
-    @extend .btn;
+    @extend .btn-add;
     width: 100%;
     margin-top: $siz_space;
   }

@@ -8,7 +8,7 @@ $col_font: rgb(13, 80, 134);
 $col_font_strike: rgb(209, 209, 209);
 $col_subfont: gray;
 $col_dangerous: rgb(233, 120, 120);
-$col_todo: rgb(236, 178, 17);
+$col_attention: rgb(236, 178, 17);
 $col_todo_back: #fff7c6;
 
 .txt{
@@ -39,5 +39,53 @@ $col_todo_back: #fff7c6;
   &:active{
     background: darken($col_accent, 10%);
     transform: translateY(1px);
+  }
+  &-add{
+    @extend .btn;
+    &::before{
+      content: '';
+      display: block;
+      position: absolute;
+      background: $col_main;
+      width: 2px;
+      height: 12px;
+    }
+    &::after{
+      @extend .btn-add::before;
+      transform: rotate(90deg);
+    }
+  }
+  &-delete{
+    @extend .btn;
+    background: $col_dangerous;
+    &:active{
+      background: darken($col_dangerous, 10%);
+    }
+    &::before{
+      @extend .btn-add::before;
+      transform: rotate(-45deg);
+    }
+    &::after{
+      @extend .btn-add::before;
+      transform: rotate(45deg);
+    }
+  }
+}
+.icon{
+  display: inline-flex;
+  width: 20px;
+  height: 20px;
+  user-select: none;
+  cursor: default;
+  justify-content: center;
+  align-items: center;
+  &-attention{
+    @extend .icon;
+    border-radius: 50%;
+    background: $col_attention;
+    &::before{
+      content: '！';
+      color: $col_main;
+    }
   }
 }

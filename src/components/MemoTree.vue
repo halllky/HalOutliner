@@ -1,10 +1,10 @@
 <template>
   <li class="memo__child">
     <div class="memo" :class="{ todo: item.todo === 1 }">
-      <span class="icon__todo" v-if="showTodoIcon">！</span>
+      <span class="memo__todo-icon" v-if="showTodoIcon"></span>
       <div ref="divHeader">
         <span class="memo__timestamp">{{ item.addDt }}</span>
-        <a class="btn" @click="addChild(0, '')"><span class="plus"></span></a>
+        <a class="btn-add" @click="addChild(0, '')"></a>
         <a class="btn" @click="switchTodo">{{ todoButtonText }}</a>
         <a class="btn" @click="switchExpand" style="min-width: 20px;">
           {{ item.expanded ? '-' : item.children ? item.children.length : '0' }}
@@ -219,6 +219,12 @@ export default {
     cursor: default;
     user-select: none;
   }
+  &__todo-icon{
+    @extend .icon-attention;
+    position: absolute;
+    top: -0.2em;
+    left: -1.2em;
+  }
   &__txt{
     @extend .txt;
     resize: none;
@@ -238,40 +244,12 @@ export default {
   &__img{
     max-width: 90%;
   }
-  &__delete-image{
-    @extend .btn;
-    position: relative;
-    vertical-align: top;
-    background: $col_dangerous;
-    &:active{
-      background: darken($col_dangerous, 10%);
-    }
-  }
 }
 .todo{
   background: $col_todo_back;
 }
 .done{
   color: $col_font_strike;
-}
-.icon{
-  display: inline-flex;
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  user-select: none;
-  cursor: default;
-  background: $col_accent;
-  color: $col_main;
-  justify-content: center;
-  align-items: center;
-  &__todo{
-    @extend .icon;
-    background: $col_todo;
-    position: absolute;
-    top: -0.2em;
-    left: -1.2em;
-  }
 }
 .transition-dropdown{
   &-enter-active, &-leave-active{
