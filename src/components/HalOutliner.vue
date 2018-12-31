@@ -16,7 +16,7 @@
       <searcher v-show="showSearcher" @search="search" style="z-index: 20;"/>
     </transition>
     <transition name="transition-fade">
-      <div v-if="showSearcher" class="smoke" style="z-index: 10;"></div>
+      <div v-if="showSearcher" class="smoke" style="z-index: 10;" @click="showSearcher = false"></div>
     </transition>
   </div>
 </template>
