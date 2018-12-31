@@ -3,21 +3,32 @@
     <a class="book-uploader__cancel" @click="cancel"></a>
     <span class="txt">please paste JSON here to upload your memo</span>
     <textarea
+      v-model="importData"
       class="book-uploader__txt"
       spellcheck="false"
       onfocus="select()"/>
-    <a class="book-uploader__ok">OK</a>
+    <a class="book-uploader__ok" @click="ok">OK</a>
   </dialog>
 </template>
 <script>
 export default {
+  data () {
+    return {
+      importData: ''
+    }
+  },
   mounted () {
     this.$refs.dialog.showModal();
   },
+  beforeDestroy () {
+    this.$refs.dialog.close();
+  },
   methods: {
+    ok () {
+      this.$emit('close', this.importData);
+    },
     cancel () {
-      this.$emit('cancel');
-      this.$refs.dialog.close();
+      this.$emit('close', '');
     }
   }
 }

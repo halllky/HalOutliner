@@ -11,7 +11,7 @@
     <a ref="downloadAnchor"></a>
     <uploader
       v-if="showUploader"
-      @cancel="closeUploader('')"/>
+      @close="closeUploader"/>
     <transition name="transition-up">
       <searcher v-show="showSearcher" @search="search" style="z-index: 20;"/>
     </transition>
@@ -55,8 +55,18 @@ export default {
       this.showUploader = true;
     },
     closeUploader (returnValue) {
-      this.showUploader = false;
-      if (!returnValue) return;
+      if (!returnValue) {
+        this.showUploader = false;
+        return;
+      }
+      try {
+        const obj1 = JSON.parse(returnValue);
+        this.$refs.memoRootItem.value = obj1.value;
+        this.$refs.memoRootItem.children = obj1.children;
+        this.showUploader = false;
+      } catch (error) {
+        alert('error');
+      }
     }
   }
 }
