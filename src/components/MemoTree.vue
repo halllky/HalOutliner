@@ -238,6 +238,15 @@ export default {
   &__img{
     max-width: 90%;
   }
+  &__delete-image{
+    @extend .btn;
+    position: relative;
+    vertical-align: top;
+    background: $col_dangerous;
+    &:active{
+      background: darken($col_dangerous, 10%);
+    }
+  }
 }
 .todo{
   background: $col_todo_back;

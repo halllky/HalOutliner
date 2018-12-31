@@ -40,13 +40,4 @@ $col_todo_back: #fff7c6;
     background: darken($col_accent, 10%);
     transform: translateY(1px);
   }
-  &__delete_image{
-    @extend .btn;
-    position: relative;
-    vertical-align: top;
-    background: $col_dangerous;
-    &:active{
-      background: darken($col_dangerous, 10%);
-    }
-  }
 }
