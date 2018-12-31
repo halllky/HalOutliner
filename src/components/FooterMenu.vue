@@ -6,7 +6,7 @@
     <li class="footer-menu__item" @click="download">
       <span class="download"></span>
     </li>
-    <li class="footer-menu__item">
+    <li class="footer-menu__item" @click="openUploader">
       <span class="upload"></span>
     </li>
   </ul>
@@ -19,6 +19,9 @@ export default {
     },
     download () {
       this.$emit('download');
+    },
+    openUploader () {
+      this.$emit('upload-start');
     }
   }
 }

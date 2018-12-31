@@ -6,8 +6,10 @@
     <footer-menu
       style="z-index: 30;"
       @search="showSearcher = !showSearcher"
-      @download="download"/>
+      @download="download"
+      @upload-start="openUploader"/>
     <a ref="downloadAnchor"></a>
+    <uploader v-if="showUploader"/>
     <transition name="transition-up">
       <searcher v-show="showSearcher" @search="search" style="z-index: 20;"/>
     </transition>
@@ -20,12 +22,14 @@
 import MemoRoot from './MemoRoot.vue';
 import FooterMenu from './FooterMenu.vue';
 import Searcher from './Searcher';
+import Uploader from './BookUploader';
 export default {
-  components: { MemoRoot, FooterMenu, Searcher },
+  components: { MemoRoot, FooterMenu, Searcher, Uploader },
   data () {
     return {
       showSearcher: false,
-      searchCondition: null
+      searchCondition: null,
+      showUploader: false
     }
   },
   methods: {
@@ -44,6 +48,9 @@ export default {
       btn.href = URL.createObjectURL(blob);
       btn.download = this.value ? this.value : 'HalOutliner';
       btn.click();
+    },
+    openUploader () {
+      this.showUploader = true;
     }
   }
 }
