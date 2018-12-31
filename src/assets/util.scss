@@ -8,7 +8,7 @@ $col_font: rgb(13, 80, 134);
 $col_font_strike: rgb(209, 209, 209);
 $col_subfont: gray;
 $col_dangerous: rgb(233, 120, 120);
-$col_todo: rgb(236, 178, 17);
+$col_attention: rgb(236, 178, 17);
 $col_todo_back: #fff7c6;
 
 .txt{
@@ -49,4 +49,13 @@ $col_todo_back: #fff7c6;
   cursor: default;
   justify-content: center;
   align-items: center;
+  &-attention{
+    @extend .icon;
+    border-radius: 50%;
+    background: $col_attention;
+    &::before{
+      content: '！';
+      color: $col_main;
+    }
+  }
 }

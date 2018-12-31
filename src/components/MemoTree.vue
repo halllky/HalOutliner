@@ -220,16 +220,10 @@ export default {
     user-select: none;
   }
   &__todo-icon{
-    @extend .icon;
+    @extend .icon-attention;
     position: absolute;
     top: -0.2em;
     left: -1.2em;
-    border-radius: 50%;
-    background: $col_todo;
-    &::before{
-      content: '！';
-      color: $col_main;
-    }
   }
   &__txt{
     @extend .txt;
