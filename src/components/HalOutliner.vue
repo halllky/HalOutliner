@@ -37,24 +37,6 @@ export default {
 </script>
 <style lang="scss">
 @import '../assets/util.scss';
-.book{
-  max-width: 50em;
-  background: $col_base;
-  border-radius: $siz_radius;
-  box-sizing: border-box;
-  padding: $siz_space;
-  margin-bottom: 50vh;
-  margin-left: auto;
-  margin-right: auto;
-}
-.title{
-  outline: none;
-  border: none;
-  font-size: 18px;
-  min-height: 1.4em;
-  border-bottom: 1px solid $col_accent;
-  background: transparent;
-}
 .memo{
   position: relative;
   background: $col_main;
@@ -85,9 +67,7 @@ export default {
     padding-left: 1.5em;
   }
   &__child{
-    list-style-type: none;
-    width: 100%;
-    box-sizing: border-box;
+    display: block;
     margin-top: $siz_space;
   }
   &__timestamp{

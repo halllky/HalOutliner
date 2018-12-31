@@ -1,5 +1,5 @@
 <template>
-  <li>
+  <li class="memo__child">
     <div class="memo" :class="{ todo: item.todo === 1 }">
       <span class="icon__todo" v-if="showTodoIcon">！</span>
       <div ref="divHeader">
@@ -34,7 +34,6 @@
         :key="index"
         :item="c"
         ref="childItem"
-        class="memo__child"
         @remove="removeChild($event); save();"
         @save="save">
       </memo-tree>
