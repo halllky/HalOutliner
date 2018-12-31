@@ -117,31 +117,6 @@ export default {
     max-width: 90%;
   }
 }
-.btn{
-  display: inline-flex;
-  min-width: 20px;
-  min-height: 20px;
-  background: $col_accent;
-  color: $col_main;
-  border-radius: $siz_radius;
-  justify-content: center;
-  align-items: center;
-  user-select: none;
-  cursor: default;
-  &:active{
-    background: darken($col_accent, 10%);
-    transform: translateY(1px);
-  }
-  &__delete_image{
-    @extend .btn;
-    position: relative;
-    vertical-align: top;
-    background: $col_dangerous;
-    &:active{
-      background: darken($col_dangerous, 10%);
-    }
-  }
-}
 .icon{
   display: inline-flex;
   width: 20px;
@@ -173,20 +148,6 @@ export default {
 .v-enter, .v-leave-to{
   opacity: 0;
   transform: translateY(-100%);
-}
-.txt{
-  border: none;
-  outline: none;
-  color: $col_font;
-  font-family: "Yu Gothic", "游ゴシック", YuGothic, "游ゴシック体", "ヒラギノ角ゴ Pro W3", "メイリオ", sans-serif;
-}
-.input{
-  &__txt{
-    @extend .txt;
-    padding: 2px 10px;
-    border-radius: 20px;
-    box-shadow: 1px 1px 1px 1px rgba(19, 17, 26, 0.2) inset;
-  }
 }
 .footer-menu{
   width: 100%;
