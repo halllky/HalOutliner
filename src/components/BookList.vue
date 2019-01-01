@@ -7,7 +7,7 @@
         :key="index"
         @click="selectBook(index)">
         {{ b.value }}
-        {{ b.AddDt }}
+        {{ b.addDt }}
       </li>
       <li>create new memo</li>
     </ul>
@@ -17,7 +17,7 @@
 export default {
   data () {
     return {
-      AddDt: new Date(),
+      addDt: new Date(),
       children: []
     }
   },
@@ -25,7 +25,7 @@ export default {
     // import data from stolage to this.children
     this.children.push({
       value: 'book title',
-      AddDt: new Date(),
+      addDt: new Date(),
       children: []
     })
   },
