@@ -1,10 +1,13 @@
 <template>
   <div>
     <book-list
-      @selectBook="showBook"/>
+      v-if="!showBook"
+      @selectBook="selectBook"/>
     <memo-root
+      v-show="showBook"
       ref="memoRootItem"
-      :search-condition="searchCondition"/>
+      :search-condition="searchCondition"
+      @close="closeBook"/>
     <footer-menu
       style="z-index: 30;"
       @search="showSearcher = !showSearcher"
@@ -32,14 +35,19 @@ export default {
   components: { BookList, MemoRoot, FooterMenu, Searcher, Uploader },
   data () {
     return {
+      showBook: false,
       showSearcher: false,
       searchCondition: null,
       showUploader: false
     }
   },
   methods: {
-    showBook (selectedItem) {
+    selectBook (selectedItem) {
       this.$refs.memoRootItem.initialize(selectedItem);
+      this.showBook = true;
+    },
+    closeBook () {
+      this.showBook = false;
     },
     search (condition) {
       this.showSearcher = false;

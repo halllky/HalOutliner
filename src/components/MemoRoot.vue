@@ -1,7 +1,7 @@
 <template>
   <div ref="divBook" class="book">
     <a class="book__btn-delete" @click="clear"></a>
-    <a class="book__btn-back"></a>
+    <a class="book__btn-back" @click="close"></a>
     <input
       class="book__title"
       type="text"
@@ -112,6 +112,9 @@ export default {
       this.addDt = memo.addDt;
       this.value = memo.value;
       this.children = memo.children;
+    },
+    close () {
+      this.$emit('close');
     },
     formatDate (date, format) {
       // HACK: duplicate with MemoTree.vue
