@@ -1,6 +1,7 @@
 <template>
   <div ref="divBook" class="book">
     <a class="book__btn-delete" @click="clear"></a>
+    <a class="book__btn-back"></a>
     <input
       class="book__title"
       type="text"
@@ -167,6 +168,11 @@ export default {
   &__items{
     margin: auto;
     padding: 0;
+  }
+  &__btn-back{
+    @extend .btn-back;
+    float: right;
+    margin-right: 6px;
   }
   &__btn-delete{
     @extend .btn-delete;

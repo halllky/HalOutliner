@@ -27,6 +27,7 @@ $col_todo_back: #fff7c6;
 }
 .btn{
   display: inline-flex;
+  position: relative;
   min-width: 20px;
   min-height: 20px;
   background: $col_accent;
@@ -67,6 +68,34 @@ $col_todo_back: #fff7c6;
     }
     &::after{
       @extend .btn-add::before;
+      transform: rotate(45deg);
+    }
+  }
+  &-back{
+    @extend .btn;
+    &::before{
+      content: '';
+      width: 10px;
+      height: 6px;
+      position: absolute;
+      top: 6px;
+      left: 5px;
+      color: $col_main;
+      border-top: solid 2px;
+      border-bottom: solid 2px;
+      border-right: solid 2px;
+      border-radius: 0 50% 50% 0;
+    }
+    &::after{
+      content: '';
+      width: 4px;
+      height: 4px;
+      position: absolute;
+      top: 4px;
+      left: 4px;
+      color: $col_main;
+      border-left: solid 2px;
+      border-bottom: solid 2px;
       transform: rotate(45deg);
     }
   }
