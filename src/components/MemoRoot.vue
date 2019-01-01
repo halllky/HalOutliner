@@ -107,6 +107,11 @@ export default {
         this.children = [];
       }
     },
+    initialize (memo) {
+      this.addDt = memo.addDt;
+      this.value = memo.value;
+      this.children = memo.children;
+    },
     formatDate (date, format) {
       // HACK: duplicate with MemoTree.vue
       // https://qiita.com/osakanafish/items/c64fe8a34e7221e811d0

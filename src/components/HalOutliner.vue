@@ -39,8 +39,7 @@ export default {
   },
   methods: {
     showBook (selectedItem) {
-      this.$refs.memoRootItem.value = selectedItem.value;
-      this.$refs.memoRootItem.children = selectedItem.children;
+      this.$refs.memoRootItem.initialize(selectedItem);
     },
     search (condition) {
       this.showSearcher = false;
