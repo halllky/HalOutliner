@@ -1,13 +1,17 @@
 <template>
   <div>
-    <book-list
-      v-if="!showBook"
-      @selectBook="selectBook"/>
-    <memo-root
-      v-show="showBook"
-      ref="memoRootItem"
-      :search-condition="searchCondition"
-      @close="closeBook"/>
+    <transition name="transition-leftside">
+      <book-list
+        v-if="!showBook"
+        @selectBook="selectBook"/>
+    </transition>
+    <transition name="transition-rightside">
+      <memo-root
+        v-show="showBook"
+        ref="memoRootItem"
+        :search-condition="searchCondition"
+        @close="closeBook"/>
+    </transition>
     <footer-menu
       style="z-index: 30;"
       @search="showSearcher = !showSearcher"
@@ -105,6 +109,31 @@ export default {
   }
   &-enter-active, &-leave-active{
     transition: all .2s ease;
+  }
+}
+.transition-leftside{
+  &-enter, &-leave-to{
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  &-enter-to, &-leave{
+    opacity: 1;
+  }
+  &-enter-active, &-leave-active{
+    transition: all .4s ease;
+    position: absolute;
+  }
+}
+.transition-rightside{
+  &-enter, &-leave-to{
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  &-enter-to, &-leave{
+    opacity: 1;
+  }
+  &-enter-active, &-leave-active{
+    transition: all .4s ease;
   }
 }
 .transition-fade{
