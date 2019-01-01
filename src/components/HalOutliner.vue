@@ -1,5 +1,6 @@
 <template>
   <div>
+    <book-list/>
     <memo-root
       ref="memoRootItem"
       :search-condition="searchCondition"/>
@@ -21,12 +22,13 @@
   </div>
 </template>
 <script>
+import BookList from './BookList.vue';
 import MemoRoot from './MemoRoot.vue';
 import FooterMenu from './FooterMenu.vue';
 import Searcher from './Searcher';
 import Uploader from './BookUploader';
 export default {
-  components: { MemoRoot, FooterMenu, Searcher, Uploader },
+  components: { BookList, MemoRoot, FooterMenu, Searcher, Uploader },
   data () {
     return {
       showSearcher: false,
