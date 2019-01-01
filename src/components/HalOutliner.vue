@@ -1,6 +1,7 @@
 <template>
   <div>
-    <book-list/>
+    <book-list
+      @selectBook="showBook"/>
     <memo-root
       ref="memoRootItem"
       :search-condition="searchCondition"/>
@@ -37,6 +38,10 @@ export default {
     }
   },
   methods: {
+    showBook (selectedItem) {
+      this.$refs.memoRootItem.value = selectedItem.value;
+      this.$refs.memoRootItem.children = selectedItem.children;
+    },
     search (condition) {
       this.showSearcher = false;
       this.$set(this, 'searchCondition', condition);

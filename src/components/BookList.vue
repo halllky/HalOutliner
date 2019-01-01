@@ -2,7 +2,10 @@
   <div>
     HalOutliner
     <ul>
-      <li v-for="(b, index) in children" :key="index">
+      <li
+        v-for="(b, index) in children"
+        :key="index"
+        @click="selectBook(index)">
         {{ b.value }}
         {{ b.AddDt }}
       </li>
@@ -22,8 +25,14 @@ export default {
     // import data from stolage to this.children
     this.children.push({
       value: 'book title',
-      AddDt: new Date()
+      AddDt: new Date(),
+      children: []
     })
+  },
+  methods: {
+    selectBook (id) {
+      this.$emit('selectBook', this.children[id]);
+    }
   }
 }
 </script>
