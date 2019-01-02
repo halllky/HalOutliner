@@ -121,7 +121,6 @@ export default {
   }
   &-enter-active, &-leave-active{
     transition: all .4s ease;
-    position: absolute;
   }
 }
 .transition-rightside{

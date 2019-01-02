@@ -1,15 +1,17 @@
 <template>
-  <div>
-    HalOutliner
-    <ul>
+  <div class="book-list">
+    <span class="txt">HalOutliner</span>
+    <ul class="book-list__list">
       <li
         v-for="(b, index) in children"
         :key="index"
+        class="book-list__item"
         @click="selectBook(index)">
-        {{ b.value }}
-        {{ b.addDt }}
+        <div class="book-list__txt-time">{{ b.addDt }}</div>
+        <span class="txt">{{ b.value }}</span>
+        <hr class="book-list__hr">
       </li>
-      <li>create new memo</li>
+      <li class="book-list__add"></li>
     </ul>
   </div>
 </template>
@@ -24,10 +26,23 @@ export default {
   mounted () {
     // import data from stolage to this.children
     this.children.push({
-      value: 'book title',
+      value: 'dummy001',
+      addDt: new Date(),
+      children: [
+        {value: 'aaa', type: 0, addDt: new Date()},
+        {value: 'bbb', type: 0, addDt: new Date()}
+      ]
+    });
+    this.children.push({
+      value: 'dummy002',
       addDt: new Date(),
       children: []
-    })
+    });
+    this.children.push({
+      value: 'dummy003',
+      addDt: new Date(),
+      children: []
+    });
   },
   methods: {
     selectBook (id) {
@@ -36,3 +51,46 @@ export default {
   }
 }
 </script>
+<style lang="scss">
+@import '../assets/util.scss';
+.book-list{
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  min-width: 50vw;
+  background: $col_base;
+  box-sizing: border-box;
+  padding: $siz_space;
+  margin-bottom: 50vh;
+  margin-left: auto;
+  margin-right: auto;
+  &__list{
+    display: block;
+    margin: 0;
+    padding: $siz_space;
+    background: $col_main;
+  }
+  &__item{
+    display: block;
+  }
+  &__add{
+    @extend .btn-add;
+    display: flex;
+  }
+  &__txt-time{
+    @extend .txt;
+    float: right;
+    color: $col_subfont;
+    font-size: 10px;
+    cursor: default;
+    user-select: none;
+  }
+  &__hr{
+    width: 95%;
+    height: 1px;
+    border-width: 0;
+    margin: $siz_space/2 auto;
+    background-color: $col_font_strike;
+  }
+}
+</style>
