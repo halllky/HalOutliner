@@ -7,8 +7,9 @@
         :key="index"
         class="book-list__item">
         <a class="btn-edit" @click="selectBook(index)"></a>
-        <div class="book-list__txt-time">{{ b.addDt }}</div>
         <span class="txt">{{ b.value }}</span>
+        <a class="book-list__btn-delete" @click="clear(index)"></a>
+        <div class="book-list__txt-time">{{ b.addDt }}</div>
         <hr class="book-list__hr">
       </li>
       <li class="book-list__add"></li>
@@ -47,6 +48,10 @@ export default {
   methods: {
     selectBook (id) {
       this.$emit('selectBook', this.children[id]);
+    },
+    clear (id) {
+      if (!confirm('clear?')) return;
+      this.children = this.children.filter(c => c !== this.children[id]);
     }
   }
 }
@@ -91,6 +96,10 @@ export default {
     border-width: 0;
     margin: $siz_space/2 auto;
     background-color: $col_font_strike;
+  }
+  &__btn-delete{
+    @extend .btn-delete;
+    float: right;
   }
 }
 </style>

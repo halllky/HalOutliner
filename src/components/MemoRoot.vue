@@ -1,6 +1,5 @@
 <template>
   <div ref="divBook" class="book">
-    <a class="book__btn-delete" @click="clear"></a>
     <a class="book__btn-back" @click="close"></a>
     <input
       class="book__title"
@@ -102,12 +101,6 @@ export default {
       })
       localStorage.setItem('halOutliner', d);
     },
-    clear () {
-      if (confirm('clear?')) {
-        this.value = '';
-        this.children = [];
-      }
-    },
     initialize (memo) {
       this.addDt = memo.addDt;
       this.value = memo.value;
@@ -174,11 +167,6 @@ export default {
   }
   &__btn-back{
     @extend .btn-back;
-    float: right;
-    margin-right: 6px;
-  }
-  &__btn-delete{
-    @extend .btn-delete;
     float: right;
   }
   &__btn-add{
