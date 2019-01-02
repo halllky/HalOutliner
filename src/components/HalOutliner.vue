@@ -3,7 +3,8 @@
     <transition name="transition-leftside">
       <book-list
         v-if="!showBook"
-        @selectBook="selectBook"/>
+        @selectBook="selectBook"
+        @upload-start="openUploader"/>
     </transition>
     <transition name="transition-rightside">
       <memo-root
@@ -15,8 +16,7 @@
     <footer-menu
       style="z-index: 30;"
       @search="showSearcher = !showSearcher"
-      @download="download"
-      @upload-start="openUploader"/>
+      @download="download"/>
     <a ref="downloadAnchor"></a>
     <uploader
       v-if="showUploader"

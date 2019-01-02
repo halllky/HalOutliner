@@ -12,6 +12,9 @@
         <div class="book-list__txt-time">{{ b.addDt }}</div>
         <hr class="book-list__hr">
       </li>
+      <!-- FIXME: dirty layout -->
+      <li class="book-list__btn" @click="openUploader"><span class="upload"></span></li>
+      <hr class="book-list__hr">
       <li class="book-list__add"></li>
     </ul>
   </div>
@@ -52,6 +55,9 @@ export default {
     clear (id) {
       if (!confirm('clear?')) return;
       this.children = this.children.filter(c => c !== this.children[id]);
+    },
+    openUploader () {
+      this.$emit('upload-start');
     }
   }
 }
@@ -77,6 +83,9 @@ export default {
   }
   &__item{
     display: block;
+  }
+  &__btn{
+    @extend .btn;
   }
   &__add{
     @extend .btn-add;
