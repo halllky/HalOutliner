@@ -99,6 +99,29 @@ $col_todo_back: #fff7c6;
       transform: rotate(45deg);
     }
   }
+  /* https://cssicon.space/#/ */
+  &-edit {
+    @extend .btn;
+    &::after{
+      content: '';
+      position: absolute;
+      width: 10px;
+      height: 4px;
+      background-color: $col_main;
+      transform: translate(2px, -2px) rotate(-45deg);
+    }
+    &::before {
+      content: '';
+      position: absolute;
+      width: 0px;
+      height: 0px;
+      border-left: solid 6px transparent;
+      border-right: solid 6px $col_main;
+      border-top: solid 2px transparent;
+      border-bottom: solid 2px transparent;
+      transform: translate(-7px, 7px) rotate(-45deg);
+    }
+  }
 }
 .icon{
   display: inline-flex;
