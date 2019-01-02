@@ -5,8 +5,8 @@
       <li
         v-for="(b, index) in children"
         :key="index"
-        class="book-list__item"
-        @click="selectBook(index)">
+        class="book-list__item">
+        <a class="btn-edit" @click="selectBook(index)"></a>
         <div class="book-list__txt-time">{{ b.addDt }}</div>
         <span class="txt">{{ b.value }}</span>
         <hr class="book-list__hr">
