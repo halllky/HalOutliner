@@ -19,3 +19,7 @@ yarn-error.log*
 /platforms/android/app/build/
 /platforms/android/CordovaLib/build/
 /platforms/android/app/src/
+
+# auto created files by 'plugin add cordova-plugin-file'
+/plugins/cordova-plugin-file
+/platforms/android/platform_www/plugins
