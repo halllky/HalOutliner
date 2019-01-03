@@ -1,12 +1,12 @@
 <template>
   <dialog class="book-uploader" ref="dialog">
     <a class="book-uploader__cancel" @click="cancel"></a>
-    <span class="txt">please paste JSON here to upload your memo</span>
-    <textarea
-      v-model="importData"
-      class="book-uploader__txt"
-      spellcheck="false"
-      onfocus="select()"/>
+    <input
+      type="file"
+      accept="application/json"
+      class="book-uploader__input"
+      @change="importData">
+      <div class="txt">{{ state }}</div>
     <a class="book-uploader__ok" @click="ok">OK</a>
   </dialog>
 </template>
@@ -14,7 +14,8 @@
 export default {
   data () {
     return {
-      importData: ''
+      state: 'no file selected',
+      importString: ''
     }
   },
   mounted () {
@@ -25,10 +26,29 @@ export default {
   },
   methods: {
     ok () {
-      this.$emit('close', this.importData);
+      this.$emit('close', this.importString);
     },
     cancel () {
       this.$emit('close', '');
+    },
+    importData (e) {
+      if (e.target.files.length === 0) {
+        this.state = 'no file selected';
+      } else {
+        const vm = this;
+        const r = new FileReader();
+        r.onload = function () {
+          try {
+            JSON.parse(this.result);
+            vm.state = 'load complete';
+            vm.importString = this.result;
+          } catch (error) {
+            vm.state = 'invalid file';
+          }
+        }
+        r.readAsText(e.target.files[0]);
+        this.state = 'now on loading';
+      }
     }
   }
 }
@@ -39,12 +59,9 @@ export default {
   border: none;
   border-radius: $siz_radius;
   background: $col_main;
-  &__txt{
-    @extend .txt;
-    resize: none;
-    border: solid 1px;
-    width: 100%;
-    box-sizing: border-box;
+  &__input{
+    display: block;
+    outline: none;
   }
   &__ok{
     @extend .btn;
