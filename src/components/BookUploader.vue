@@ -3,7 +3,6 @@
     <a class="book-uploader__cancel" @click="cancel"></a>
     <input
       type="file"
-      accept="application/json"
       class="book-uploader__input"
       @change="importData">
       <div class="txt">{{ state }}</div>
