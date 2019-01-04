@@ -19,3 +19,5 @@ yarn-error.log*
 /platforms/android/app/build/
 /platforms/android/CordovaLib/build/
 /platforms/android/app/src/
+
+/plugins/
