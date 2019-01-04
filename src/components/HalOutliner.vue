@@ -41,6 +41,7 @@ export default {
       window.setTimeout(this.$refs.memoRootItem.delayResize, 10);
     },
     download () {
+      if (!confirm('download?')) return;
       const obj = {
         value: this.$refs.memoRootItem.value,
         children: this.$refs.memoRootItem.children
