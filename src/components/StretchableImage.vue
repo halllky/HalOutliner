@@ -2,7 +2,7 @@
   <div>
     <img
       :src="value"
-      :class="cssclass">
+      class="memo__img">
     <a class="btn-delete" @click="deleteThis"></a>
   </div>
 </template>
@@ -10,8 +10,7 @@
 export default {
   name: 'CaptionAndImage',
   props: {
-    value: String,
-    cssclass: String
+    value: String
   },
   methods: {
     deleteThis () {
@@ -22,3 +21,9 @@ export default {
   }
 }
 </script>
+<style lang="scss">
+@import '../assets/util.scss';
+.memo__img{
+  max-width: 90%;
+}
+</style>

@@ -23,7 +23,6 @@
         <stretchable-image
           v-if="item.type === 1"
           :value="item.value"
-          cssclass="memo__img"
           @deleted="deleteMe">
         </stretchable-image>
       </div>
@@ -197,9 +196,6 @@ export default {
     position: absolute;
     top: -0.2em;
     left: -1.2em;
-  }
-  &__img{
-    max-width: 90%;
   }
 }
 .todo{
