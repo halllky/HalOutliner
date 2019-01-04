@@ -75,14 +75,5 @@
     "> 1%",
     "last 2 versions",
     "not ie <= 8"
-  ],
-  "cordova": {
-    "plugins": {
-      "cordova-plugin-whitelist": {},
-      "cordova-plugin-android-permissions": {}
-    },
-    "platforms": [
-      "android"
-    ]
-  }
+  ]
 }
