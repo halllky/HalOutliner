@@ -126,14 +126,6 @@ export default {
     },
     removeChild (e) {
       this.item.children = this.item.children.filter(c => c !== e);
-      // 'mounted' (= resizing textarea) dont work when part of v-for array is removed
-      const vm = this;
-      function delayResize () {
-        for (let i = 0; i < vm.$refs.childItem.length; i++) {
-          vm.$refs.childItem[i].resize();
-        }
-      }
-      window.setTimeout(delayResize, 10);
     },
     addChild (type, value) {
       if (this.item.children === undefined) {
@@ -154,9 +146,6 @@ export default {
         vm.addChild(1, fr.result);
       }
       fr.readAsDataURL(e);
-    },
-    resize () {
-      this.$refs.textItem.resize();
     }
   }
 };
@@ -212,6 +201,7 @@ export default {
   &__txt{
     @extend .txt;
     resize: none;
+    overflow: hidden;
     padding: 0;
     width: 100%;
     height: 1em;

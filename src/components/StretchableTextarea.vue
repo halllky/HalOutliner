@@ -23,6 +23,9 @@ export default {
       set (v) { this.$emit('input', v); }
     }
   },
+  updated () {
+    this.resize();
+  },
   mounted () {
     this.resize();
     // select textarea on constructed
@@ -36,7 +39,6 @@ export default {
       this.$emit('leave', e);
     },
     onInput (e) {
-      this.resize();
       this.$emit('textchange', e, this);
     },
     onPaste (e) {
