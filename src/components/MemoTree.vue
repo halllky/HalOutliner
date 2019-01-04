@@ -198,23 +198,6 @@ export default {
     top: -0.2em;
     left: -1.2em;
   }
-  &__txt{
-    @extend .txt;
-    resize: none;
-    overflow: hidden;
-    padding: 0;
-    width: 100%;
-    height: 1em;
-    min-height: 1em;
-    font-size: 14px;
-    background: transparent;
-    font-weight: 500;
-    line-height: 16px;
-    &_strike{
-      color: $col_font_strike;
-      text-decoration-line: line-through;
-    }
-  }
   &__img{
     max-width: 90%;
   }
