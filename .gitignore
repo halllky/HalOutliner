@@ -15,7 +15,5 @@ yarn-error.log*
 
 # cordova build files
 /www/
-/platforms/android/.gradle/
-/platforms/android/app/build/
-/platforms/android/CordovaLib/build/
-/platforms/android/app/src/
+/platforms/
+/plugins/

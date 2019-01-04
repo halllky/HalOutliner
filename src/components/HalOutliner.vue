@@ -46,10 +46,15 @@ export default {
         children: this.$refs.memoRootItem.children
       };
       const blob = new Blob([JSON.stringify(obj)], {type: 'application/json'});
-      const btn = this.$refs.downloadAnchor;
-      btn.href = URL.createObjectURL(blob);
-      btn.download = this.value ? this.value : 'HalOutliner';
-      btn.click();
+      const fileName = obj.value ? obj.value : 'HalOutliner';
+      if (this.isAndroid()) {
+        this.downloadForAndroid(blob, fileName + '.json');
+      } else {
+        const btn = this.$refs.downloadAnchor;
+        btn.href = URL.createObjectURL(blob);
+        btn.download = fileName;
+        btn.click();
+      }
     },
     openUploader () {
       this.showUploader = true;
