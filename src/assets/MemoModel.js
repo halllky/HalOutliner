@@ -1,7 +1,7 @@
 export default class {
   constructor (type, value, addDt) {
-    this.type = type;
-    this.value = value;
+    this.type = typeof type === 'undefined' ? 0 : type;
+    this.value = typeof value === 'undefined' ? '' : value;
     this.addDt = typeof addDt === 'undefined' ? new Date() : addDt;
     this.todo = 0;
     this.children = [];
