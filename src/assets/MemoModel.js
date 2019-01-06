@@ -23,4 +23,18 @@ export default class {
     }
     return format;
   }
+
+  hasTodo () {
+    function isTodo (parent) {
+      if (parent.todo === 1) {
+        return true;
+      }
+      if (parent.children !== undefined) {
+        let i = parent.children.filter(c => isTodo(c));
+        if (i.length > 0) return true;
+      }
+      return false;
+    }
+    return isTodo(this);
+  }
 }
