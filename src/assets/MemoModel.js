@@ -37,4 +37,20 @@ export default class {
     }
     return isTodo(this);
   }
+
+  hasTerm (term) {
+    // eslint-disable-next-line no-irregular-whitespace
+    const reg = new RegExp(term.split(/( |　)+|\n+/g).join('|'), 'mi');
+    function hasTermRecursively (parent) {
+      if (reg.test(parent.value)) {
+        return true;
+      }
+      if (parent.children !== undefined) {
+        let i = parent.children.filter(c => hasTermRecursively(c));
+        if (i.length > 0) return true;
+      }
+      return false;
+    }
+    return hasTermRecursively(this);
+  }
 }
