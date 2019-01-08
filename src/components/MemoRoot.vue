@@ -23,6 +23,7 @@
 </template>
 <script>
 import MemoTree from './MemoTree';
+import MemoModel from '../assets/MemoModel';
 
 export default {
   name: 'MemoRoot',
@@ -80,12 +81,7 @@ export default {
     },
     addRootMemo () {
       // HACK: duplicate with MemoTree.vue
-      this.children.push({
-        addDt: this.formatDate(new Date(), 'YYYY-MM-DD hh:mm'),
-        expanded: true,
-        type: 0,
-        value: ''
-      });
+      this.children.push(new MemoModel());
     },
     save () {
       const d = JSON.stringify({

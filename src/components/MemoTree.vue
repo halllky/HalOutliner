@@ -46,6 +46,7 @@
 <script>
 import StretchableTextarea from './StretchableTextarea';
 import StretchableImage from './StretchableImage';
+import MemoModel from '../assets/MemoModel';
 
 export default {
   name: 'MemoTree',
@@ -127,15 +128,7 @@ export default {
       this.item.children = this.item.children.filter(c => c !== e);
     },
     addChild (type, value) {
-      if (this.item.children === undefined) {
-        this.$set(this.item, 'children', []);
-      }
-      this.item.children.push({
-        addDt: this.formatDate(new Date(), 'YYYY-MM-DD hh:mm'),
-        expanded: true,
-        type: type,
-        value: value
-      })
+      this.item.children.push(new MemoModel());
       this.$set(this.item, 'expanded', true);
     },
     addChildImage (e) {
