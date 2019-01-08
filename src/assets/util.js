@@ -12,7 +12,7 @@ export default {
             fr.result,
             cordova.file.externalRootDirectory + 'Download/' + fileName,
             function (fileEntry) {
-              alert('download complete to ' + fileEntry.fullPath);
+              alert('download complete to \n' + fileEntry.fullPath);
             },
             function (error) {
               alert('download error code: ' + error.code);
