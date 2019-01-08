@@ -48,7 +48,7 @@ export default {
       const blob = new Blob([JSON.stringify(obj)], {type: 'application/json'});
       const fileName = obj.value ? obj.value : 'HalOutliner';
       if (this.isAndroid()) {
-        this.downloadForAndroid(blob, fileName + '.json');
+        this.downloadForAndroid(blob, fileName);
       } else {
         const btn = this.$refs.downloadAnchor;
         btn.href = URL.createObjectURL(blob);

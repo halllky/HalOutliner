@@ -5,33 +5,44 @@ export default {
       return typeof cordova !== 'undefined';
     },
     downloadForAndroid (blob, fileName) {
-      function execDownload () {
-        const fr = new FileReader();
-        fr.onload = () => {
-          new FileTransfer().download(
-            fr.result,
-            cordova.file.externalRootDirectory + 'Download/' + fileName,
-            function (fileEntry) {
-              alert('download complete to \n' + fileEntry.fullPath);
-            },
-            function (error) {
-              alert('download error code: ' + error.code);
+      function execDownload (i) {
+        let modifiedName = fileName + (i === 0 ? '' : '(' + i + ')') + '.json';
+        alert('check: ' + modifiedName);
+        window.resolveLocalFileSystemURL(
+          cordova.file.externalRootDirectory + 'Download/' + modifiedName,
+          () => {
+            // case when same name file exists
+            execDownload(i + 1);
+          },
+          () => {
+            const fr = new FileReader();
+            fr.onload = () => {
+              new FileTransfer().download(
+                fr.result,
+                cordova.file.externalRootDirectory + 'Download/' + modifiedName,
+                function (fileEntry) {
+                  alert('download complete to \n' + fileEntry.fullPath);
+                },
+                function (error) {
+                  alert('download error code: ' + error.code);
+                }
+              );
             }
-          );
-        }
-        fr.readAsDataURL(blob);
+            fr.readAsDataURL(blob);
+          }
+        );
       }
       const per = cordova.plugins.permissions;
       per.checkPermission(
         per.WRITE_EXTERNAL_STORAGE,
         function (statusBeforeRequest) {
           if (statusBeforeRequest.hasPermission) {
-            execDownload();
+            execDownload(0);
           } else {
             per.requestPermission(
               per.WRITE_EXTERNAL_STORAGE,
               function (statusAfterRequest) {
-                if (statusAfterRequest.hasPermission) execDownload();
+                if (statusAfterRequest.hasPermission) execDownload(0);
               }
             );
           }
