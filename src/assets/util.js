@@ -7,7 +7,6 @@ export default {
     downloadForAndroid (blob, fileName) {
       function execDownload (i) {
         let modifiedName = fileName + (i === 0 ? '' : '(' + i + ')') + '.json';
-        alert('check: ' + modifiedName);
         window.resolveLocalFileSystemURL(
           cordova.file.externalRootDirectory + 'Download/' + modifiedName,
           () => {
