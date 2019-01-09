@@ -90,6 +90,7 @@ export default {
     }
   },
   mounted () {
+    this.$el.scrollIntoView(true);
     // switch header class where the view area is wide or not
     const iswide = this.$refs.divHeader.clientWidth > 500;
     this.$refs.divHeader.classList.add(iswide ? 'memo__header_inbody' : 'memo__header_outbody');
