@@ -48,6 +48,25 @@ export default {
         }
       );
     },
+    scrollTo (element) {
+      const rect = element.getBoundingClientRect();
+      const startY = window.pageYOffset;
+      const destY =
+        rect.top +
+        rect.height / 2 -
+        Math.max(document.documentElement.clientHeight, window.innerHeight || 0) / 2 + // view height / 2
+        window.pageYOffset +
+        rect.height; // <- memo appears from adove because of css transition
+      const timeSpan = 10;
+      let progress = 0;
+      const move = function () {
+        progress++;
+        const y = startY + (destY - startY) * progress / timeSpan;
+        window.scrollTo(0, y);
+        if (progress < timeSpan) requestAnimationFrame(move);
+      }
+      requestAnimationFrame(move);
+    },
     formatDate (date, format) {
       // https://qiita.com/osakanafish/items/c64fe8a34e7221e811d0
       if (!format) format = 'YYYY-MM-DD hh:mm:ss.SSS';
