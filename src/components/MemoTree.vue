@@ -18,6 +18,7 @@
           @deleted="deleteMe">
         </stretchable-image>
       </div>
+      <memo-menu/>
       <div ref="divHeader" class="memo__header">
         <span class="memo__timestamp">{{ item.addDt }}</span>
         <a class="btn-add" @click="addChild(0, '')"></a>
@@ -44,12 +45,14 @@
   </li>
 </template>
 <script>
+import MemoMenu from './MemoMenu.vue';
 import StretchableTextarea from './StretchableTextarea';
 import StretchableImage from './StretchableImage';
 
 export default {
   name: 'MemoTree',
   components: {
+    MemoMenu,
     StretchableTextarea,
     StretchableImage
   },
