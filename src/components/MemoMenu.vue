@@ -2,13 +2,18 @@
   <div>
     <ul>
       <li @click="switchTodo">{{ todoButtonText }}</li>
+      <li @click="$emit('switchExpand')">
+        {{ expanded || childCount === 0 ? '-' : childCount }}
+      </li>
     </ul>
   </div>
 </template>
 <script>
 export default {
   props: {
-    todo: 0
+    todo: 0,
+    expanded: false,
+    childCount: 0
   },
   computed: {
     todoButtonText: {
