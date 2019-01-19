@@ -18,11 +18,12 @@
           @deleted="deleteMe">
         </stretchable-image>
       </div>
-      <memo-menu/>
+      <memo-menu
+        :todo="item.todo"
+        @switchTodo="switchTodo"/>
       <div ref="divHeader" class="memo__header">
         <span class="memo__timestamp">{{ item.addDt }}</span>
         <a class="btn-add" @click="addChild(0, '')"></a>
-        <a class="btn" @click="switchTodo">{{ todoButtonText }}</a>
         <a class="btn" @click="switchExpand" style="min-width: 20px;">
           {{ item.expanded ? '-' : item.children ? item.children.length : '0' }}
         </a>
@@ -99,14 +100,8 @@ export default {
     save () {
       this.$emit('save');
     },
-    switchTodo: function () {
-      let t;
-      switch (this.item.todo) {
-        case 1: t = 2; break; // todo -> done
-        case 2: t = 0; break; // done -> normal
-        default: t = 1; break;// normal -> todo
-      }
-      this.$set(this.item, 'todo', t);
+    switchTodo (val) {
+      this.$set(this.item, 'todo', val);
     },
     switchExpand () {
       if (this.item.children) {
