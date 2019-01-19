@@ -1,5 +1,6 @@
 <template>
   <div>
+    <span>{{ timestamp }}</span>
     <ul>
       <li @click="switchTodo">{{ todoButtonText }}</li>
       <li @click="$emit('switchExpand')">
@@ -12,6 +13,7 @@
 <script>
 export default {
   props: {
+    timestamp: '',
     todo: 0,
     expanded: false,
     childCount: 0

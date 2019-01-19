@@ -19,15 +19,13 @@
         </stretchable-image>
       </div>
       <memo-menu
+        :timestamp="item.addDt"
         :todo="item.todo"
         :expanded="item.expanded"
         :childCount="item.children ? item.children.length : '0'"
         @switchTodo="switchTodo"
         @switchExpand="switchExpand"
         @addChild="addChild(0, '')"/>
-      <div ref="divHeader" class="memo__header">
-        <span class="memo__timestamp">{{ item.addDt }}</span>
-      </div>
     </div>
     <transition-group
       tag="ul"
