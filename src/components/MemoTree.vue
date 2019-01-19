@@ -18,7 +18,16 @@
           @deleted="deleteMe">
         </stretchable-image>
       </div>
+      <span @click="menuOpened = !menuOpened">menu</span>
+      <div
+        class="smoke"
+        style="z-index: 1; background: transparent;"
+        v-if="menuOpened"
+        @click="menuOpened = false">
+      </div>
       <memo-menu
+        v-if="menuOpened"
+        style="z-index: 2;"
         :timestamp="item.addDt"
         :todo="item.todo"
         :expanded="item.expanded"
@@ -54,6 +63,11 @@ export default {
     MemoMenu,
     StretchableTextarea,
     StretchableImage
+  },
+  data () {
+    return {
+      menuOpened: false
+    }
   },
   props: {
     item: {
