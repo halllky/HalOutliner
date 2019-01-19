@@ -2,14 +2,6 @@
   <li class="memo__child">
     <div class="memo" :class="{ todo: item.todo === 1 }">
       <span class="memo__todo-icon" v-if="showTodoIcon"></span>
-      <div ref="divHeader">
-        <span class="memo__timestamp">{{ item.addDt }}</span>
-        <a class="btn-add" @click="addChild(0, '')"></a>
-        <a class="btn" @click="switchTodo">{{ todoButtonText }}</a>
-        <a class="btn" @click="switchExpand" style="min-width: 20px;">
-          {{ item.expanded ? '-' : item.children ? item.children.length : '0' }}
-        </a>
-      </div>
       <div class="memo__body">
         <stretchable-textarea
           v-if="item.type === 0"
@@ -25,6 +17,14 @@
           :value="item.value"
           @deleted="deleteMe">
         </stretchable-image>
+      </div>
+      <div ref="divHeader" class="memo__header">
+        <span class="memo__timestamp">{{ item.addDt }}</span>
+        <a class="btn-add" @click="addChild(0, '')"></a>
+        <a class="btn" @click="switchTodo">{{ todoButtonText }}</a>
+        <a class="btn" @click="switchExpand" style="min-width: 20px;">
+          {{ item.expanded ? '-' : item.children ? item.children.length : '0' }}
+        </a>
       </div>
     </div>
     <transition-group
@@ -91,9 +91,6 @@ export default {
   },
   mounted () {
     this.scrollTo(this.$el);
-    // switch header class where the view area is wide or not
-    const iswide = this.$refs.divHeader.clientWidth > 500;
-    this.$refs.divHeader.classList.add(iswide ? 'memo__header_inbody' : 'memo__header_outbody');
   },
   methods: {
     save () {
@@ -153,6 +150,7 @@ export default {
 <style lang="scss">
 @import '../assets/util.scss';
 .memo{
+  display: flex;
   position: relative;
   background: $col_main;
   border-radius: $siz_radius;
@@ -176,6 +174,7 @@ export default {
   }
   &__body{
     line-height: 0;
+    width: 100%;
   }
   &__children{
     margin: auto;
