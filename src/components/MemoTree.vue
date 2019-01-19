@@ -32,6 +32,7 @@
         :todo="item.todo"
         :expanded="item.expanded"
         :childCount="item.children ? item.children.length : '0'"
+        @close="menuOpened = false"
         @switchTodo="switchTodo"
         @switchExpand="switchExpand"
         @addChild="addChild(0, '')"/>

@@ -2,11 +2,11 @@
   <div>
     <span>{{ timestamp }}</span>
     <ul>
-      <li @click="switchTodo">{{ todoButtonText }}</li>
-      <li @click="$emit('switchExpand')">
+      <li @click="switchTodo(); $emit('close');">{{ todoButtonText }}</li>
+      <li @click="$emit('switchExpand'); $emit('close');">
         {{ expanded || childCount === 0 ? '-' : childCount }}
       </li>
-      <li @click="$emit('addChild')"></li>
+      <li @click="$emit('addChild'); $emit('close');"></li>
     </ul>
   </div>
 </template>
