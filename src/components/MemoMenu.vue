@@ -5,6 +5,7 @@
       <li @click="$emit('switchExpand')">
         {{ expanded || childCount === 0 ? '-' : childCount }}
       </li>
+      <li @click="$emit('addChild')"></li>
     </ul>
   </div>
 </template>
