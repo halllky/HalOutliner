@@ -1,12 +1,12 @@
 <template>
-  <div>
+  <div class="memo-menu">
     <span>{{ timestamp }}</span>
-    <ul>
-      <li @click="switchTodo(); $emit('close');">{{ todoButtonText }}</li>
-      <li @click="$emit('switchExpand'); $emit('close');">
+    <ul class="memo-menu__list">
+      <li class="btn" @click="switchTodo(); $emit('close');">{{ todoButtonText }}</li>
+      <li class="btn" @click="$emit('switchExpand'); $emit('close');">
         {{ expanded || childCount === 0 ? '-' : childCount }}
       </li>
-      <li @click="$emit('addChild'); $emit('close');"></li>
+      <li class="btn-add" @click="$emit('addChild'); $emit('close');"></li>
     </ul>
   </div>
 </template>
@@ -43,3 +43,18 @@ export default {
   }
 }
 </script>
+<style lang="scss">
+@import '../assets/util.scss';
+.memo-menu{
+  position: absolute;
+  right: 0;
+  background: $col_main;
+  &__list{
+    display: flex;
+    flex-direction: column;
+    & :not(:last-child){
+      margin-top: 2px;
+    }
+  }
+}
+</style>

@@ -18,7 +18,7 @@
           @deleted="deleteMe">
         </stretchable-image>
       </div>
-      <span @click="menuOpened = !menuOpened">menu</span>
+      <a class="btn" @click="menuOpened = !menuOpened">menu</a>
       <div
         class="smoke"
         style="z-index: 1; background: transparent;"
