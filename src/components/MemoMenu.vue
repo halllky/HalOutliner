@@ -49,10 +49,12 @@ export default {
   position: absolute;
   right: 0;
   background: $col_main;
+  box-shadow: 0px 0px 15px -5px rgba(0, 0, 0, 0.8);
   &__list{
     display: flex;
     flex-direction: column;
-    & :not(:last-child){
+    margin: 2px;
+    & :not(:first-child){
       margin-top: 2px;
     }
   }

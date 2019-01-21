@@ -18,24 +18,26 @@
           @deleted="deleteMe">
         </stretchable-image>
       </div>
-      <a class="btn" @click="menuOpened = !menuOpened">menu</a>
+      <a class="memo__btn-menu" @click="menuOpened = !menuOpened">menu</a>
       <div
         class="smoke"
         style="z-index: 1; background: transparent;"
         v-if="menuOpened"
         @click="menuOpened = false">
       </div>
-      <memo-menu
-        v-if="menuOpened"
-        style="z-index: 2;"
-        :timestamp="item.addDt"
-        :todo="item.todo"
-        :expanded="item.expanded"
-        :childCount="item.children ? item.children.length : '0'"
-        @close="menuOpened = false"
-        @switchTodo="switchTodo"
-        @switchExpand="switchExpand"
-        @addChild="addChild(0, '')"/>
+      <transition name="transition-dropdown">
+        <memo-menu
+          v-if="menuOpened"
+          style="z-index: 2;"
+          :timestamp="item.addDt"
+          :todo="item.todo"
+          :expanded="item.expanded"
+          :childCount="item.children ? item.children.length : '0'"
+          @close="menuOpened = false"
+          @switchTodo="switchTodo"
+          @switchExpand="switchExpand"
+          @addChild="addChild(0, '')"/>
+      </transition>
     </div>
     <transition-group
       tag="ul"
@@ -207,6 +209,10 @@ export default {
     position: absolute;
     top: -0.2em;
     left: -1.2em;
+  }
+  &__btn-menu{
+    @extend .btn;
+    font-size: 8px;
   }
 }
 .todo{
