@@ -2,6 +2,11 @@
   <li class="memo__child">
     <div class="memo" :class="{ todo: item.todo === 1 }">
       <span class="memo__todo-icon" v-if="showTodoIcon"></span>
+      <div class="memo__btn-expand" @click="switchExpand">
+        {{ item.expanded ||
+        !item.children ||
+        item.children.length === 0 ? '-' : item.children.length }}
+      </div>
       <div class="memo__body">
         <stretchable-textarea
           v-if="item.type === 0"
@@ -31,11 +36,8 @@
           style="z-index: 2;"
           :timestamp="item.addDt"
           :todo="item.todo"
-          :expanded="item.expanded"
-          :childCount="item.children ? item.children.length : '0'"
           @close="menuOpened = false"
           @switchTodo="switchTodo"
-          @switchExpand="switchExpand"
           @addChild="addChild(0, '')"/>
       </transition>
     </div>
@@ -209,6 +211,15 @@ export default {
     position: absolute;
     top: -0.2em;
     left: -1.2em;
+  }
+  &__btn-expand{
+    @extend .btn;
+    margin-right: $siz_space;
+    background: transparent;
+    color: $col_accent;
+    &:active{
+      background: transparent;
+    }
   }
   &__btn-menu{
     @extend .btn;

@@ -3,9 +3,6 @@
     <span>{{ timestamp }}</span>
     <ul class="memo-menu__list">
       <li class="btn" @click="switchTodo(); $emit('close');">{{ todoButtonText }}</li>
-      <li class="btn" @click="$emit('switchExpand'); $emit('close');">
-        {{ expanded || childCount === 0 ? '-' : childCount }}
-      </li>
       <li class="btn-add" @click="$emit('addChild'); $emit('close');"></li>
     </ul>
   </div>
@@ -14,9 +11,7 @@
 export default {
   props: {
     timestamp: '',
-    todo: 0,
-    expanded: false,
-    childCount: 0
+    todo: 0
   },
   computed: {
     todoButtonText: {
