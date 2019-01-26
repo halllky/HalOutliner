@@ -7,7 +7,8 @@
         class="search__txt"
         v-model="searchTerm"
         spellcheck="false"
-        onfocus="select();">
+        onfocus="select();"
+        @keydown="searchOnEnter">
     </label>
     <label for="only_todo" class="search__condition">
       <input type="checkbox" id="only_todo" v-model="onlyTodo">only todo
@@ -30,6 +31,11 @@ export default {
         searchTerm: this.searchTerm,
         onlyTodo: this.onlyTodo
       });
+    },
+    searchOnEnter (e) {
+      if (e.keyCode === 13) {
+        this.search();
+      }
     }
   }
 }
