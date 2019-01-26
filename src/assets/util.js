@@ -48,7 +48,7 @@ export default {
         }
       );
     },
-    scrollTo (element) {
+    scrollTo (element, offset = 0) {
       const rect = element.getBoundingClientRect();
       const startY = window.pageYOffset;
       const destY =
@@ -62,7 +62,7 @@ export default {
       const move = function () {
         progress++;
         const y = startY + (destY - startY) * progress / timeSpan;
-        window.scrollTo(0, y);
+        window.scrollTo(0, y + offset);
         if (progress < timeSpan) requestAnimationFrame(move);
       }
       requestAnimationFrame(move);
