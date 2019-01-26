@@ -40,7 +40,8 @@ export default {
   position: fixed;
   bottom: $siz_footer_height;
   left: 0;
-  width: 20em;
+  width: 100%;
+  box-sizing: border-box;
   padding: $siz_space;
   background: $col_base;
   border-radius: $siz_radius;
@@ -51,6 +52,7 @@ export default {
   &__txt{
     @extend .input__txt;
     width: -webkit-fill-available;
+    font-size: 20px;
   }
   &__btn{
     @extend .btn;
