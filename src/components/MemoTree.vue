@@ -23,24 +23,7 @@
           @deleted="deleteMe">
         </stretchable-image>
       </div>
-      <a class="memo__btn-menu" @click="menuOpened = !menuOpened">menu</a>
-      <div
-        class="smoke"
-        style="z-index: 1; background: transparent;"
-        v-if="menuOpened"
-        @click="menuOpened = false">
-      </div>
       <a class="btn-add" @click="addChild(0, '')"></a>
-      <transition name="transition-dropdown">
-        <memo-menu
-          v-if="menuOpened"
-          style="z-index: 2;"
-          :timestamp="item.addDt"
-          :todo="item.todo"
-          @close="menuOpened = false"
-          @switchTodo="switchTodo"
-          @addChild="addChild(0, '')"/>
-      </transition>
     </div>
     <transition-group
       tag="ul"
@@ -59,14 +42,12 @@
   </li>
 </template>
 <script>
-import MemoMenu from './MemoMenu.vue';
 import StretchableTextarea from './StretchableTextarea';
 import StretchableImage from './StretchableImage';
 
 export default {
   name: 'MemoTree',
   components: {
-    MemoMenu,
     StretchableTextarea,
     StretchableImage
   },
@@ -223,10 +204,6 @@ export default {
     &:active{
       background: transparent;
     }
-  }
-  &__btn-menu{
-    @extend .btn;
-    font-size: 8px;
   }
 }
 .todo{
