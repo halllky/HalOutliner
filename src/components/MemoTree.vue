@@ -23,7 +23,7 @@
           @deleted="deleteMe">
         </stretchable-image>
       </div>
-      <a class="btn-add" @click="addChild(0, '')"></a>
+      <a class="memo__btn-add" @click="addChild(0, '')"></a>
     </div>
     <transition-group
       tag="ul"
@@ -151,6 +151,7 @@ export default {
 .memo{
   display: flex;
   position: relative;
+  align-items: center;
   background: $col_main;
   border-radius: $siz_radius;
   box-sizing: border-box;
@@ -198,12 +199,17 @@ export default {
   }
   &__btn-expand{
     @extend .btn;
+    align-self: stretch;
     margin-right: $siz_space;
     background: transparent;
     color: $col_accent;
     &:active{
       background: transparent;
     }
+  }
+  &__btn-add{
+    @extend .btn-add;
+    align-self: stretch;
   }
 }
 .todo{
