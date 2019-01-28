@@ -30,6 +30,7 @@
         v-if="menuOpened"
         @click="menuOpened = false">
       </div>
+      <a class="btn-add" @click="addChild(0, '')"></a>
       <transition name="transition-dropdown">
         <memo-menu
           v-if="menuOpened"
