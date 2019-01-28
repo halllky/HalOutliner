@@ -3,6 +3,12 @@
     <li class="footer-menu__item" @click="switchShowSearcher">
       <span class="magnifier"></span>
     </li>
+    <li class="footer-menu__item" @click="$store.commit('toWriteMode')">
+      write
+    </li>
+    <li class="footer-menu__item" @click="$store.commit('toTodoMode')">
+      todo
+    </li>
     <li class="footer-menu__item" @click="download">
       <span class="download"></span>
     </li>
