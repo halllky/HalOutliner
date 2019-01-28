@@ -1,8 +1,9 @@
 <template>
   <div class="search">
-    <label for="text" class="search__condition">
+    <label for="txt-search-term" class="search__condition">
       contains:
       <input
+        id="txt-search-term"
         type="text"
         class="search__txt"
         v-model="searchTerm"
@@ -54,6 +55,7 @@ export default {
   &__condition{
     display: flex;
     padding-bottom: $siz_space;
+    align-items: center;
   }
   &__txt{
     @extend .input__txt;
