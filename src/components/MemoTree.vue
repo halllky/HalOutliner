@@ -7,11 +7,12 @@
         !item.children ||
         item.children.length === 0 ? '-' : item.children.length }}
       </div>
-      <div class="memo__body">
+      <div class="memo__body" @click="switchTodo">
         <stretchable-textarea
           v-if="item.type === 0"
           v-model="item.value"
           :strike="item.todo === 2"
+          :disabled="$store.state.mode !== 0"
           ref="textItem"
           @textchange="save"
           @leave="deleteIfEmpty"
@@ -96,8 +97,13 @@ export default {
     save () {
       this.$emit('save');
     },
-    switchTodo (val) {
-      this.$set(this.item, 'todo', val);
+    switchTodo () {
+      if (this.$store.state.mode !== 1) return;
+      switch (this.item.todo) {
+        case 1: this.$set(this.item, 'todo', 2); break; // todo -> done
+        case 2: this.$set(this.item, 'todo', 0); break; // done -> normal
+        default: this.$set(this.item, 'todo', 1); break;// normal -> todo
+      }
     },
     switchExpand () {
       if (this.item.children) {
