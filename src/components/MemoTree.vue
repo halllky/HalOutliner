@@ -1,5 +1,5 @@
 <template>
-  <li class="memo__child">
+  <li class="memo__child" v-if="visible">
     <div class="memo" :class="{ todo: item.todo === 1 }">
       <span class="memo__todo-icon" v-if="showTodoIcon"></span>
       <div class="memo__btn-expand" @click="switchExpand">
@@ -61,6 +61,10 @@ export default {
     item: {
       type: Object,
       required: true
+    },
+    visible: {
+      type: Boolean,
+      default: true
     }
   },
   computed: {
