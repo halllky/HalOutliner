@@ -7,7 +7,7 @@ yarn-error.log*
 
 # Editor directories and files
 .idea
-.vscode
+.vscode/*
 *.suo
 *.ntvs*
 *.njsproj
@@ -17,3 +17,6 @@ yarn-error.log*
 /www/
 /platforms/
 /plugins/
+
+# for debug
+!.vscode/launch.json
