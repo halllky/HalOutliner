@@ -140,7 +140,7 @@ export default {
       })
       this.$set(this.item, 'expanded', true);
       // scroll to created child ... but the element isn't exist yet
-      if (this.$refs.childItem.length > 0) {
+      if (this.item.children.length > 1) {
         const lastChild = this.$refs.childItem[this.$refs.childItem.length - 1].$el;
         this.scrollTo(lastChild, lastChild.getBoundingClientRect().height);
       }
