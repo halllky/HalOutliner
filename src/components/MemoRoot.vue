@@ -71,8 +71,13 @@ export default {
         }
         return false;
       }
+      const vm = this;
       this.children.forEach(c => {
-        c.visible = (term === '' || hasTerm(c)) && (!onlyTodo || isTodo(c));
+        vm.$set(
+          c,
+          'visible',
+          (term === '' || hasTerm(c)) && (!onlyTodo || isTodo(c))
+        );
       });
     }
   },
