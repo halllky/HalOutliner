@@ -1,20 +1,18 @@
 <template>
-  <li class="memo__child">
+  <li class="memo__child" v-if="visible">
     <div class="memo" :class="{ todo: item.todo === 1 }">
       <span class="memo__todo-icon" v-if="showTodoIcon"></span>
-      <div ref="divHeader">
-        <span class="memo__timestamp">{{ item.addDt }}</span>
-        <a class="btn-add" @click="addChild(0, '')"></a>
-        <a class="btn" @click="switchTodo">{{ todoButtonText }}</a>
-        <a class="btn" @click="switchExpand" style="min-width: 20px;">
-          {{ item.expanded ? '-' : item.children ? item.children.length : '0' }}
-        </a>
+      <div class="memo__btn-expand" @click="switchExpand">
+        {{ item.expanded ||
+        !item.children ||
+        item.children.length === 0 ? '-' : item.children.length }}
       </div>
-      <div class="memo__body">
+      <div class="memo__body" @click="switchTodo">
         <stretchable-textarea
           v-if="item.type === 0"
           v-model="item.value"
           :strike="item.todo === 2"
+          :disabled="$store.state.mode !== 0"
           ref="textItem"
           @textchange="save"
           @leave="deleteIfEmpty"
@@ -26,6 +24,7 @@
           @deleted="deleteMe">
         </stretchable-image>
       </div>
+      <a class="memo__btn-add" @click="addChild(0, '')"></a>
     </div>
     <transition-group
       tag="ul"
@@ -53,10 +52,19 @@ export default {
     StretchableTextarea,
     StretchableImage
   },
+  data () {
+    return {
+      menuOpened: false
+    }
+  },
   props: {
     item: {
       type: Object,
       required: true
+    },
+    visible: {
+      type: Boolean,
+      default: true
     }
   },
   computed: {
@@ -89,22 +97,16 @@ export default {
       }
     }
   },
-  mounted () {
-    this.scrollTo(this.$el);
-    // switch header class where the view area is wide or not
-    const iswide = this.$refs.divHeader.clientWidth > 500;
-    this.$refs.divHeader.classList.add(iswide ? 'memo__header_inbody' : 'memo__header_outbody');
-  },
   methods: {
     save () {
       this.$emit('save');
     },
-    switchTodo: function () {
-      let t;
+    switchTodo () {
+      if (this.$store.state.mode !== 1) return;
       switch (this.item.todo) {
-        case 1: t = 2; break; // todo -> done
-        case 2: t = 0; break; // done -> normal
-        default: t = 1; break;// normal -> todo
+        case 1: this.$set(this.item, 'todo', 2); break; // todo -> done
+        case 2: this.$set(this.item, 'todo', 0); break; // done -> normal
+        default: this.$set(this.item, 'todo', 1); break;// normal -> todo
       }
       this.$set(this.item, 'todo', t);
       this.save();
@@ -139,6 +141,11 @@ export default {
         value: value
       })
       this.$set(this.item, 'expanded', true);
+      // scroll to created child ... but the element isn't exist yet
+      if (this.item.children.length > 1) {
+        const lastChild = this.$refs.childItem[this.$refs.childItem.length - 1].$el;
+        this.scrollTo(lastChild, lastChild.getBoundingClientRect().height);
+      }
     },
     addChildImage (e) {
       const vm = this;
@@ -154,7 +161,9 @@ export default {
 <style lang="scss">
 @import '../assets/util.scss';
 .memo{
+  display: flex;
   position: relative;
+  align-items: center;
   background: $col_main;
   border-radius: $siz_radius;
   box-sizing: border-box;
@@ -177,6 +186,7 @@ export default {
   }
   &__body{
     line-height: 0;
+    width: 100%;
   }
   &__children{
     margin: auto;
@@ -198,6 +208,20 @@ export default {
     position: absolute;
     top: -0.2em;
     left: -1.2em;
+  }
+  &__btn-expand{
+    @extend .btn;
+    align-self: stretch;
+    margin-right: $siz_space;
+    background: transparent;
+    color: $col_accent;
+    &:active{
+      background: transparent;
+    }
+  }
+  &__btn-add{
+    @extend .btn-add;
+    align-self: stretch;
   }
 }
 .todo{

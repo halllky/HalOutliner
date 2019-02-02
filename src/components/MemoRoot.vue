@@ -10,9 +10,10 @@
       @input="save">
     <ul class="book__items">
       <memo-tree
-        v-for="(c, index) in filteredChildren"
+        v-for="(c, index) in children"
         :key="index"
         :item="c"
+        :visible="c.visible"
         ref="childItem"
         @remove="removeChild($event); save();"
         @save="save">
@@ -39,8 +40,8 @@ export default {
       children: []
     }
   },
-  computed: {
-    filteredChildren () {
+  watch: {
+    searchCondition () {
       // if specify no condition
       if (this.searchCondition === undefined || this.searchCondition === null) {
         return this.children;
@@ -70,7 +71,9 @@ export default {
         }
         return false;
       }
-      return this.children.filter(c => (!term || hasTerm(c)) && (!onlyTodo || isTodo(c)));
+      this.children.forEach(c => {
+        c.visible = (term === '' || hasTerm(c)) && (!onlyTodo || isTodo(c));
+      });
     }
   },
   methods: {
@@ -84,7 +87,8 @@ export default {
         addDt: this.formatDate(new Date(), 'YYYY-MM-DD hh:mm'),
         expanded: true,
         type: 0,
-        value: ''
+        value: '',
+        visible: true
       });
     },
     save () {

@@ -1,13 +1,15 @@
 <template>
   <div class="search">
-    <label for="text" class="search__condition">
+    <label for="txt-search-term" class="search__condition">
       contains:
       <input
+        id="txt-search-term"
         type="text"
         class="search__txt"
         v-model="searchTerm"
         spellcheck="false"
-        onfocus="select();">
+        onfocus="select();"
+        @keydown="searchOnEnter">
     </label>
     <label for="only_todo" class="search__condition">
       <input type="checkbox" id="only_todo" v-model="onlyTodo">only todo
@@ -30,6 +32,11 @@ export default {
         searchTerm: this.searchTerm,
         onlyTodo: this.onlyTodo
       });
+    },
+    searchOnEnter (e) {
+      if (e.keyCode === 13) {
+        this.search();
+      }
     }
   }
 }
@@ -40,17 +47,20 @@ export default {
   position: fixed;
   bottom: $siz_footer_height;
   left: 0;
-  width: 20em;
+  width: 100%;
+  box-sizing: border-box;
   padding: $siz_space;
   background: $col_base;
   border-radius: $siz_radius;
   &__condition{
     display: flex;
     padding-bottom: $siz_space;
+    align-items: center;
   }
   &__txt{
     @extend .input__txt;
     width: -webkit-fill-available;
+    font-size: 20px;
   }
   &__btn{
     @extend .btn;

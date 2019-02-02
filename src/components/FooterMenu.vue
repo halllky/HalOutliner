@@ -3,6 +3,22 @@
     <li class="footer-menu__item" @click="switchShowSearcher">
       <span class="magnifier"></span>
     </li>
+    <li
+      :class="{
+        'footer-menu__item-active': this.$store.state.mode === 0,
+        'footer-menu__item': this.$store.state.mode !== 0
+      }"
+      @click="$store.commit('toWriteMode')">
+      write
+    </li>
+    <li
+      :class="{
+        'footer-menu__item-active': this.$store.state.mode === 1,
+        'footer-menu__item': this.$store.state.mode !== 1
+      }"
+      @click="$store.commit('toTodoMode')">
+      todo
+    </li>
     <li class="footer-menu__item" @click="download">
       <span class="download"></span>
     </li>
@@ -44,6 +60,11 @@ export default {
     @extend .btn;
     width: -webkit-fill-available;
     margin: 0 2px;
+    &-active, &-active:active{
+      @extend .footer-menu__item;
+      background: $col_attention;
+      color: $col_main;
+    }
   }
 }.upload {
   color: $col_main;
