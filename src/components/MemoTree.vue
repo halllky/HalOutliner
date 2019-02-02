@@ -108,7 +108,6 @@ export default {
         case 2: this.$set(this.item, 'todo', 0); break; // done -> normal
         default: this.$set(this.item, 'todo', 1); break;// normal -> todo
       }
-      this.$set(this.item, 'todo', t);
       this.save();
     },
     switchExpand () {
