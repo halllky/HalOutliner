@@ -45,13 +45,22 @@ export default {
 <style lang="scss">
 @import '../assets/util.scss';
 .footer-menu{
-  width: 100%;
-  height: $siz_footer_height;
   display: flex;
   justify-content: space-around;
   position: fixed;
   left: 0;
-  bottom: 0;
+  @include if-pc{
+    flex-direction: column;
+    top: 0;
+    width: $siz_footer_width;
+    height: 100%;
+  }
+  @include if-phone{
+    flex-direction: row;
+    bottom: 0;
+    width: 100%;
+    height: $siz_footer_height;
+  }
   box-sizing: border-box;
   margin: 0;
   padding: 2px 0;
@@ -59,7 +68,8 @@ export default {
   &__item{
     @extend .btn;
     width: -webkit-fill-available;
-    margin: 0 2px;
+    height: -webkit-fill-available;
+    margin: 2px;
     &-active, &-active:active{
       @extend .footer-menu__item;
       background: $col_attention;

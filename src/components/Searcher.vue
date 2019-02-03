@@ -45,11 +45,19 @@ export default {
 @import '../assets/util.scss';
 .search{
   position: fixed;
-  bottom: $siz_footer_height;
+  @include if-pc{
+    top: 0;
+  }
+  @include if-phone{
+    bottom: $siz_footer_height;
+  }
   left: 0;
   width: 100%;
   box-sizing: border-box;
   padding: $siz_space;
+  @include if-pc{
+    padding-left: $siz_footer_width;
+  }
   background: $col_base;
   border-radius: $siz_radius;
   &__condition{
