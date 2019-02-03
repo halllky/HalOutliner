@@ -12,7 +12,7 @@
     <uploader
       v-if="showUploader"
       @close="closeUploader"/>
-    <transition name="transition-up">
+    <transition name="transition-searcher">
       <searcher v-show="showSearcher" @search="search" style="z-index: 20;"/>
     </transition>
     <transition name="transition-fade">
@@ -87,9 +87,14 @@ export default {
   height: 100vh;
   background: rgba(0, 0, 0, 0.3);
 }
-.transition-up{
+.transition-searcher{
   &-enter, &-leave-to{
-    transform: translateY(100%);
+    @include if-pc{
+      transform: translateY(-100%);
+    }
+    @include if-phone{
+      transform: translateY(100%);
+    }
   }
   &-enter-to, &-leave{
     transform: translateY(0);
