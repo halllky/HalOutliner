@@ -10,6 +10,19 @@ $col_subfont: gray;
 $col_dangerous: rgb(197, 104, 127);
 $col_attention: rgb(240, 137, 77);
 $col_todo_back: #ffe1bf;
+$breakpoint_pc: 2560px;
+$breakpoint_phone: 1080px;
+
+@mixin if-pc {
+  @media screen and (max-width: $breakpoint_pc) and (min-width: $breakpoint_phone) {
+    @content;
+  }
+}
+@mixin if-phone {
+  @media screen and (max-width: $breakpoint_phone) {
+    @content;
+  }
+}
 
 .txt{
   border: none;
